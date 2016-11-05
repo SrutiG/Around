@@ -1,6 +1,9 @@
 package com.aroundme.around.controllers;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.aroundme.around.R;
 
@@ -26,6 +30,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
     Spinner statusSpinner;
     Button enter_status;
     EditText status;
+    TextView logoutBT;
     LinearLayout status_enter;
     String[] statuses = {"Available", "Do Not Disturb", "Custom...", null};
 
@@ -49,6 +54,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
         status_enter = (LinearLayout) flayout.findViewById(R.id.status_enter);
         status = (EditText) flayout.findViewById(R.id.status);
         enter_status = (Button) flayout.findViewById(R.id.enter_status);
+        logoutBT = (TextView) flayout.findViewById(R.id.logoutBT);
         enter_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +66,17 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
                 statuses[3] = userStatus;
                 statusSpinner.setSelection(3);
                 status_enter.setVisibility(View.GONE);
+            }
+        });
+        logoutBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent login = new Intent(getActivity(), LoginActivity.class);
+                SharedPreferences sp = getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
+                Editor editor = sp.edit();
+                editor.remove("email");
+                startActivity(login);
+
             }
         });
         status_enter.setVisibility(View.GONE);
