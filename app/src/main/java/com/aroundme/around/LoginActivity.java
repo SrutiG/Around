@@ -14,4 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void handleLoginClicked(View view) {
     }
+
+    public void handleRegisterClicked(View view) {
+    }
 }

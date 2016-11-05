@@ -14,23 +14,28 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="email"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:id="@+id/email"/>
     <EditText
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="password"/>
+        android:hint="password"
+        android:id="@+id/password"/>
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:onClick="handleLoginClicked"/>
+        android:onClick="handleLoginClicked"
+        android:id="@+id/login_button"/>
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="New User? Register"
         android:gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:id="@+id/register_button"
+        android:layout_marginTop="10dp"
+        android:onClick="handleRegisterClicked"/>
 
 
 </LinearLayout>
