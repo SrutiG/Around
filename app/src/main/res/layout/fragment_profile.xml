@@ -3,11 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aroundme.around.ProfileFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_name"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Firstname Lastname"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:id="@+id/full_name"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        <Spinner
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:id="@+id/status_spinner">
+        </Spinner>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="University:"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Interests:"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+
+    </LinearLayout>
+
+
 
 </FrameLayout>
