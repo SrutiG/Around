@@ -9,6 +9,7 @@
     <color name="Header">#131619</color>
     <color name="text">#8a9eb2</color>
     <color name="button">#9eb4cc</color>
-
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="bottom_bar">#262626</color>
 </resources>
