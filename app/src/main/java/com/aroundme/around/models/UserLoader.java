@@ -27,6 +27,7 @@ public class UserLoader extends AsyncTask<String, Void, Integer>  {
             Holder.id = Integer.parseInt(getHtml("http://bibliotecas.net46.net/profileID.php?user=" + params[0] + "&pass=" + params[1]).split("\t", 2)[0]);
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         return null;
     }
