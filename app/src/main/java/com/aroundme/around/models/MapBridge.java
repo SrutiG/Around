@@ -49,7 +49,7 @@ public class MapBridge extends AsyncTask<String, String,String> {
             public void run() {
                 try {
                     System.out.println("Pinging " + Holder.tracker.getLatitude() + " - " + Holder.tracker.getLongitude());
-                    getHtml("http://mulegame3.comxa.com/ping.php?latitude=" + Holder.tracker.getLatitude() + "&longitude=" + Holder.tracker.getLongitude() + "&user=" + Holder.user);
+                    getHtml("http://bibliotecas.net46.net/ping.php?latitude=" + Holder.tracker.getLatitude() + "&longitude=" + Holder.tracker.getLongitude() + "&user=" + Holder.user);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -62,7 +62,7 @@ public class MapBridge extends AsyncTask<String, String,String> {
     public void updateNearbyUsers(int distance, double latitude, double longitude) {
         try {
             System.out.println("pulling near " + latitude + " , " + longitude);
-            System.out.println(getHtml("http://mulegame3.comxa.com/query.php?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance));
+            System.out.println(getHtml("http://bibliotecas.net46.net/query.php?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance));
         } catch (IOException e) {
             e.printStackTrace();
         }

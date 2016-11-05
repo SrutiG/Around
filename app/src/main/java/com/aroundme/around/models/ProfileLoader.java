@@ -32,7 +32,7 @@ public class ProfileLoader extends AsyncTask<String, Void, Profile>  {
     }
 
     public static Profile loadUser(int id) throws IOException {
-        String[] vals = getHtml("http://mulegame3.comxa.com/profile.php?id=" + id).split("<br/>");
+        String[] vals = getHtml("http://bibliotecas.net46.net/profile.php?id=" + id).split("<br/>");
         return new Profile(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5]);
     }
 
