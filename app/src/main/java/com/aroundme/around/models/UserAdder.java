@@ -23,7 +23,7 @@ public class UserAdder extends AsyncTask<String, Void, String>  {
     @Override
     protected String doInBackground(String... params) {
         try {
-            getHtml("http://mulegame3.comxa.com/profileID.php?user=" + params[0] + "&pass=" + params[1]);
+            getHtml("http://mulegame3.comxa.com/addUser.php?first=" + params[0] + "&last=" + params[1] + "&email=" + params[2] + "&pass=" + params[3]);
         } catch (IOException e) {
             e.printStackTrace();
         }

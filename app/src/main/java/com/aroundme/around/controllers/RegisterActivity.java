@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.aroundme.around.controllers.MainActivity;
+import com.aroundme.around.models.UserAdder;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("email", userEmail);
         Intent viewMain = new Intent(this, MainActivity.class);
         startActivity(viewMain);
+        new UserAdder().execute("first", "last", "email", "pass");
     }
 
     public void handleCancelClicked(View view) {
