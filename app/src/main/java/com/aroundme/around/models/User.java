@@ -11,9 +11,6 @@ public class User {
     private String email;
     private String password;
     private String status;
-    private String description;
-    private String university;
-    private String interests;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -42,12 +39,6 @@ public class User {
         this.status = status;
     }
 
-    public void setDescription(String description) { this.description = description; }
-
-    public void setUniversity(String university) { this.university = university; }
-
-    public void setInterests(String interests) { this.interests = interests; }
-
     public String getFirstName() {
         return firstName;
     }
@@ -67,11 +58,5 @@ public class User {
     public String getStatus() {
         return status;
     }
-
-    public String getDescription() { return description; }
-
-    public String getUniversity() { return university; }
-
-    public String getInterests() { return interests; }
 
 }
