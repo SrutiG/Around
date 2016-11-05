@@ -24,9 +24,10 @@ public class UserLoader extends AsyncTask<String, Void, Integer>  {
     @Override
     protected Integer doInBackground(String... params) {
         try {
-            Holder.id = Integer.parseInt(getHtml("http://mulegame3.comxa.com/profileID.php?user=" + params[0] + "&pass=" + params[1]));
+            Holder.id = Integer.parseInt(getHtml("http://bibliotecas.net46.net/profileID.php?user=" + params[0] + "&pass=" + params[1]).split("\t", 2)[0]);
         } catch (IOException e) {
             e.printStackTrace();
+
         }
         return null;
     }
