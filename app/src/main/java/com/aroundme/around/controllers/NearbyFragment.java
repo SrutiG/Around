@@ -3,7 +3,9 @@ package com.aroundme.around.controllers;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -70,6 +72,15 @@ public class NearbyFragment extends Fragment {
         people_list.setLayoutManager(nearbyManager);
         nearbyAdapter = new NearbyAdapter(users);
         people_list.setAdapter(nearbyAdapter);
+        FloatingActionButton action = (FloatingActionButton) flayout.findViewById(R.id.fab);
+        action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment, new MapFragment(), "MapFragment");
+                ft.commit();
+            }
+        });
         return flayout;
     }
 
