@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin">
+        android:padding="@dimen/activity_vertical_margin">
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_name"
             android:id="@+id/propic_nearby"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            android:layout_margin="10dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sruti Guhathakurta"
                 android:id="@+id/name_nearby"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimaryDark"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,13 +42,15 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/status_nearby"
                     android:text="Available"
-                    android:textSize="15dp"/>
+                    android:textSize="12dp"
+                    android:textColor="@color/Header"/>
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/other_nearby"
-                android:text="Interests: Running, Coding, Traveling"/>
+                android:text="Interests: Running, Coding, Traveling"
+                android:textColor="@color/colorAccent"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

@@ -22,15 +22,6 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:gravity="center"
                 />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:orientation="horizontal"
-                android:background="@color/colorPrimary"
-                android:id="@+id/feed_title"
-                android:layout_marginBottom="@dimen/activity_vertical_margin">
-
-            </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

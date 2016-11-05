@@ -110,7 +110,7 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, new FeedFragment(), "FeedFragment");
+                ft.replace(R.id.fragment, new NearbyFragment(), "NearbyFragment");
                 ft.commit();
             }
         });

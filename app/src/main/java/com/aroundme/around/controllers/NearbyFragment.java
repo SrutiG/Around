@@ -58,10 +58,14 @@ public class NearbyFragment extends Fragment {
         User Potato = new User("Potato", "Salad", "potato@salad.com", "potato");
         Potato.setStatus("Does someone want to cook potatoes with me?");
         Potato.setInterests("Potato Sweet Potato Yam");
+        User Pablo = new User ("Pablo", "Picasso", "pablo.picasso@gmail.com", "pablo");
+        Pablo.setStatus("Available");
+        Pablo.setInterests("Art Painting History");
         users.add(Potato);
         users.add(Sruti);
         users.add(Bob);
-        people_list = (RecyclerView) getActivity().findViewById(R.id.people_list);
+        users.add(Pablo);
+        people_list = (RecyclerView) flayout.findViewById(R.id.people_list);
         nearbyManager = new LinearLayoutManager(getActivity());
         people_list.setLayoutManager(nearbyManager);
         nearbyAdapter = new NearbyAdapter(users);

@@ -65,7 +65,7 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.MyViewHold
     public void onBindViewHolder(NearbyAdapter.MyViewHolder holder, int position) {
         User user = users.get(position);
         final String email = user.getEmail();
-        holder.name_nearby.setText(user.getFirstName());
+        holder.name_nearby.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_nearby.setText(user.getStatus());
         holder.other_nearby.setText(user.getInterests());
     }
