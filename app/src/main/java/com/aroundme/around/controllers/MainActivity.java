@@ -37,8 +37,8 @@ public class MainActivity extends FragmentActivity {
         FeedFragment profile = new FeedFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
 
-        MapBridge bride = new MapBridge();
         new MapBridge().execute("read");
+        new MapBridge().execute("write");
     }
 
     public void handleMapClicked(View view) {
@@ -53,12 +53,14 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void handleProfileClicked(View view) {
+        ProfileFragment profile = new ProfileFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
 
     }
 
     public void handleSettingsClicked(View view) {
-        ProfileSettingsFragment profile = new ProfileSettingsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
+        ProfileSettingsFragment profileSet = new ProfileSettingsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileSet).commit();
     }
 
     public void setFragment(Fragment fragment) {
