@@ -1,12 +1,22 @@
 package com.aroundme.around.controllers;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,9 +24,18 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.VisibleRegion;
 
 
 /**
@@ -73,7 +92,8 @@ public class MapFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
-                googleMap.setMyLocationEnabled(true);
+                googleMap.setMyLocationEnabled(false);
+                loadMarkers(googleMap, mMapView);
 
                 // For dropping a marker at a point on the Map
                 LatLng sydney = new LatLng(Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
@@ -85,7 +105,30 @@ public class MapFragment extends Fragment {
             }
         });
 
+        FloatingActionButton action = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment, new FeedFragment(), "FeedFragment");
+                ft.commit();
+            }
+        });
+
+
         return rootView;
+    }
+
+    private void loadMarkers(GoogleMap map, MapView mapView) {
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.image);
+        LatLngBounds bounds = null; // get a bounds
+
+        MarkerOptions markerOptions = new MarkerOptions().position(new LatLng(Holder.tracker.getLatitude(), Holder.tracker.getLongitude()))
+                .title("Emory University")
+                .snippet("2 people here")
+                .icon(icon).zIndex(2000);
+
+        googleMap.addMarker(markerOptions);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.UserLoader;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,12 +35,13 @@ public class LoginActivity extends AppCompatActivity {
     public void handleLoginClicked(View view) {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
-        Holder.user = userEmail;
         if (userPassword.equals("pass")) {
             SharedPreferences sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
             Editor editor = sp.edit();
             editor.putString("email", userEmail);
             Intent mainView = new Intent(this, MainActivity.class);
+            Holder.user = userEmail;
+            new UserLoader().execute(userEmail, userPassword);
             startActivity(mainView);
         }
 

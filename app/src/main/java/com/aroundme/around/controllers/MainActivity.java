@@ -2,16 +2,26 @@ package com.aroundme.around.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.aroundme.around.R;
 import com.aroundme.around.models.Database;
 import com.aroundme.around.models.MapBridge;
+import com.squareup.picasso.Picasso;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends FragmentActivity {
 
@@ -54,7 +64,9 @@ public class MainActivity extends FragmentActivity {
 
     public void handleProfileClicked(View view) {
         ProfileFragment profile = new ProfileFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
+         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
+
+
 
     }
 

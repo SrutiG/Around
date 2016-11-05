@@ -70,7 +70,7 @@ public class MapBridge extends AsyncTask<String, String,String> {
         //populate nearbyUsers
     }
 
-public static String getHtml(String url) throws IOException {
+    public static String getHtml(String url) throws IOException {
         // Build and set timeout values for the request.
         URLConnection connection = (new URL(url)).openConnection();
         connection.setConnectTimeout(5000);
