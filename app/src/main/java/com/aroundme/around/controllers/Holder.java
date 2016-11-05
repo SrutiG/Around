@@ -1,4 +1,4 @@
-package com.aroundme.around;
+package com.aroundme.around.controllers;
 
 /**
  * Created by patrickcaruso on 11/5/16.

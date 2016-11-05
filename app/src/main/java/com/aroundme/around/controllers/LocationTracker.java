@@ -1,4 +1,4 @@
-package com.aroundme.around;
+package com.aroundme.around.controllers;
 
 import android.Manifest;
 import android.content.Context;

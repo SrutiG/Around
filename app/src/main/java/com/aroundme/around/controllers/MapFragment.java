@@ -1,21 +1,14 @@
 package com.aroundme.around;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,7 +32,6 @@ public class MapFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
-    private LinearLayout shape;
 
 
     public MapFragment() {
@@ -58,8 +50,8 @@ public class MapFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        System.out.println("Setting here");
+        MapsActivity activity = new MapsActivity();
     }
 
     @Override
@@ -89,7 +81,7 @@ public class MapFragment extends Fragment {
                 googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(15).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
@@ -97,25 +89,14 @@ public class MapFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+
     }
 
     @Override
-    public void onActivityCreated(Bundle bundle) {
-         super.onActivityCreated(bundle);
-
-        View view = getView();
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, new ProfileFragment(), "NewFragmentTag");
-                ft.commit();
-            }
-        });
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override

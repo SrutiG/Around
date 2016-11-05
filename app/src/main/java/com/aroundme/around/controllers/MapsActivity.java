@@ -1,8 +1,9 @@
-package com.aroundme.around;
+package com.aroundme.around.controllers;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.aroundme.around.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
