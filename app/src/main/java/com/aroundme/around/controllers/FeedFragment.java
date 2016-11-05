@@ -3,11 +3,19 @@ package com.aroundme.around.controllers;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.User;
+
+import java.util.ArrayList;
 
 
 /**
@@ -19,12 +27,14 @@ import com.aroundme.around.R;
  */
 public class FeedFragment extends Fragment {
 
+    private RecyclerView feed_list;
+    private FeedAdapter feedAdapter;
+    private RecyclerView.LayoutManager feedManager;
+    private ArrayList<User> users = new ArrayList<>();
 
     public FeedFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +45,22 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
+        User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass");
+        Sruti.setStatus("Chillin");
+        User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob");
+        Bob.setStatus("Bob being Bob");
+        users.add(Sruti);
+        users.add(Bob);
+        feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);
+        feedManager = new LinearLayoutManager(getActivity());
+        feed_list.setLayoutManager(feedManager);
+        feedAdapter = new FeedAdapter(users);
+        feed_list.setItemAnimator(new DefaultItemAnimator());
+        feed_list.setAdapter(feedAdapter);
+        return flayout;
+
+
     }
 
 

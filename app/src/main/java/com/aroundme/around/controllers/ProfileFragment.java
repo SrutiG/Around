@@ -1,12 +1,15 @@
 package com.aroundme.around.controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +34,7 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     Button enter_status;
     EditText status;
     LinearLayout status_enter;
+    String[] statuses = {"Available", "Do Not Disturb", "Custom...", null};
 
 
     public ProfileFragment() {
@@ -49,14 +53,27 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
                              Bundle savedInstanceState) {
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_profile, container, false);
         status_enter = (LinearLayout) flayout.findViewById(R.id.status_enter);
-        enter_status = (Button) flayout.findViewById(R.id.enter_status);
         status = (EditText) flayout.findViewById(R.id.status);
+        enter_status = (Button) flayout.findViewById(R.id.enter_status);
+        enter_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager inputManager = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                        InputMethodManager.HIDE_NOT_ALWAYS);
+                String userStatus = status.getText().toString();
+                statuses[3] = userStatus;
+                statusSpinner.setSelection(3);
+                status_enter.setVisibility(View.GONE);
+            }
+        });
         status_enter.setVisibility(View.GONE);
         statusSpinner = (Spinner) flayout.findViewById(R.id.status_spinner);
-        String[] statuses = {"Available", "Do Not Disturb", "Custom..."};
         int[] images = {R.drawable.ic_available, R.drawable.ic_unavailable};
         StatusAdapter arrayAdapter = new StatusAdapter(super.getActivity(), R.layout.status_item, statuses, images);
         arrayAdapter.setDropDownViewResource(R.layout.status_item);
+        statusSpinner.setOnItemSelectedListener(this);
         statusSpinner.setAdapter(arrayAdapter);
         statusSpinner.setSelection(0);
         return flayout;
@@ -68,7 +85,13 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
         String item = parent.getItemAtPosition(position).toString();
         if (item.equals("Custom...")) {
             status_enter.setVisibility(View.VISIBLE);
+        } else if ((item.equals("Available") || item.equals("Do Not Disturb"))){
+            status_enter.setVisibility(View.GONE);
+            statuses[3] = null;
+        } else if (position == 3) {
+            status_enter.setVisibility(View.GONE);
         }
+        statusSpinner.setSelection(position);
 
     }
 

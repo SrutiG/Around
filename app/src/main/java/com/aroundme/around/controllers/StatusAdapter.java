@@ -57,6 +57,10 @@ public class StatusAdapter extends ArrayAdapter {
     //getCount() determines how many times the getView should b called
     @Override
     public int getCount() {
-        return objects.length;
+        if (objects[3] != null) {
+            return objects.length;
+        } else {
+            return 3;
+        }
     }
 }
