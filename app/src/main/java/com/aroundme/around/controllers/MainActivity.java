@@ -34,8 +34,8 @@ public class MainActivity extends FragmentActivity {
         settings_button = (ImageButton) findViewById(R.id.settings_button);
         fragment = (FrameLayout) findViewById(R.id.fragment);
         sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
-        FeedFragment profile = new FeedFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
+        MapFragment map = new MapFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment, map).commit();
 
         new MapBridge().execute("read");
         new MapBridge().execute("write");

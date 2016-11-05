@@ -81,7 +81,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         User user = users.get(position);
         final String email = user.getEmail();
-        holder.profile_pic.setImageResource(R.drawable.ic_headshot);
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_message.setText(user.getStatus());
         holder.message.setOnClickListener(new View.OnClickListener() {

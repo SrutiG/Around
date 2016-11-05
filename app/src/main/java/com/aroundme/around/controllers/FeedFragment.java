@@ -55,14 +55,17 @@ public class FeedFragment extends Fragment {
         Sruti.setStatus("Can someone please teach me Javascript?");
         User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob");
         Bob.setStatus("Looking for people to play football with");
+        User Potato = new User("Potato", "Salad", "potato@salad.com", "potato");
+        Potato.setStatus("Does someone want to cook potatoes with me?");
+        users.add(Potato);
         users.add(Sruti);
         users.add(Bob);
         feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);
         feedManager = new LinearLayoutManager(getActivity());
         feed_list.setLayoutManager(feedManager);
+        feed_list.setItemAnimator(new DefaultItemAnimator());
         feedAdapter = new FeedAdapter(users);
         feedAdapter.setMain(main);
-        feed_list.setItemAnimator(new DefaultItemAnimator());
         feed_list.setAdapter(feedAdapter);
         return flayout;
 
