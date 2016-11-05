@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/newer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,6 +11,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/map" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_format_list_bulleted">
+            </android.support.design.widget.FloatingActionButton>
+
+        <LinearLayout
+            android:id="@+id/circle"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/fab"
+            android:layout_toEndOf="@+id/map"
+            android:layout_marginTop="56dp"></LinearLayout>
+
 
     </RelativeLayout>
 </LinearLayout>
