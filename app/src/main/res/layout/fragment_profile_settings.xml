@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aroundme.around.controllers.ProfileFragment">
+    tools:context="com.aroundme.around.controllers.ProfileSettingsFragment">
     <LinearLayout
         android:id="@+id/fraggy"
         android:layout_width="match_parent"
@@ -36,13 +36,13 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:id="@+id/status_enter">
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Enter Status"
                 android:layout_weight="0.75"
                 android:id="@+id/status"/>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="OK"
                 android:layout_weight="0.25"

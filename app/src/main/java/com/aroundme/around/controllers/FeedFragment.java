@@ -31,9 +31,14 @@ public class FeedFragment extends Fragment {
     private FeedAdapter feedAdapter;
     private RecyclerView.LayoutManager feedManager;
     private ArrayList<User> users = new ArrayList<>();
+    private MainActivity main;
 
     public FeedFragment() {
         // Required empty public constructor
+    }
+
+    public void setMain(MainActivity main) {
+        this.main = main;
     }
 
     @Override
@@ -56,6 +61,7 @@ public class FeedFragment extends Fragment {
         feedManager = new LinearLayoutManager(getActivity());
         feed_list.setLayoutManager(feedManager);
         feedAdapter = new FeedAdapter(users);
+        feedAdapter.setMain(main);
         feed_list.setItemAnimator(new DefaultItemAnimator());
         feed_list.setAdapter(feedAdapter);
         return flayout;

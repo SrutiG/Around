@@ -2,6 +2,7 @@ package com.aroundme.around.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,14 +48,22 @@ public class MainActivity extends FragmentActivity {
 
     public void handleFeedClicked(View view) {
         FeedFragment feed = new FeedFragment();
+        feed.setMain(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, feed).commit();
     }
 
     public void handleProfileClicked(View view) {
-        ProfileFragment profile = new ProfileFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
+
     }
 
     public void handleSettingsClicked(View view) {
+        ProfileSettingsFragment profile = new ProfileSettingsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
     }
+
+    public void setFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
+    }
+
+
 }
