@@ -31,8 +31,18 @@ public class MapBridge extends AsyncTask<String, String,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        updateNearbyUsers(Holder.distance, Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
+        if (params[0].equals("read")) {
+            updateNearbyUsers(Holder.distance, Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
+        } else if (params[0].equals("write")) {
+            pingLocation();
+        }
         return null;
+    }
+
+    public void pingLocation() {
+        //todo fix this
+        String username = "patrickec246";
+
     }
 
 
