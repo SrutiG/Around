@@ -14,11 +14,18 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.Profile;
+import com.aroundme.around.models.ProfileLoader;
+import com.aroundme.around.models.UserUpdater;
+import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -87,6 +94,40 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
         statusSpinner.setOnItemSelectedListener(this);
         statusSpinner.setAdapter(arrayAdapter);
         statusSpinner.setSelection(0);
+
+
+        try {
+            Profile p = new ProfileLoader().execute("" + Holder.id).get();
+
+            ((EditText) flayout.findViewById(R.id.full_name_text)).setText(p.getFirstName() + p.getLastName());
+            //((Spinner) flayout.findViewById(R.id.status_spinner)).setText(p.getStatus());
+            //((EditText) flayout.findViewById(R.id.descriptionET)).setText(p.getDescription());
+            ((EditText) flayout.findViewById(R.id.interestsET)).setText(p.getInterests());
+
+            ImageView finder = (ImageView) flayout.findViewById(R.id.editPic);
+            Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        final View flayout2 = flayout;
+
+        ((Button) flayout.findViewById(R.id.submitBT)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = ((EditText) flayout2.findViewById(R.id.full_name_text)).getText().toString();
+                if (s.indexOf(" ") > 0) {
+                    new UserUpdater().execute("" + Holder.id, s.split(" ", 2)[0], s.split(" ", 2)[1],
+                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString());
+                } else {
+                    new UserUpdater().execute("" + Holder.id, s, "",
+                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString());
+                }
+            }
+        });
+
         return flayout;
     }
 
