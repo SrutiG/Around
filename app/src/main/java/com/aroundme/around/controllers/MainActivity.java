@@ -19,23 +19,26 @@ public class MainActivity extends FragmentActivity {
     SharedPreferences sp;
     FrameLayout fragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Holder.tracker = new LocationTracker(getBaseContext(), getSystemService(Context.LOCATION_SERVICE), this);
         map_button = (ImageButton) findViewById(R.id.map_button);
         feed_button = (ImageButton) findViewById(R.id.feed_button);
         profile_button = (ImageButton) findViewById(R.id.profile_button);
         settings_button = (ImageButton) findViewById(R.id.settings_button);
         fragment = (FrameLayout) findViewById(R.id.fragment);
         sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
-        ProfileFragment profile = new ProfileFragment();
+        FeedFragment profile = new FeedFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
 
     }
 
     public void handleMapClicked(View view) {
-
+        MapFragment map = new MapFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, map).commit();
     }
 
     public void handleFeedClicked(View view) {
