@@ -11,6 +11,8 @@ public class User {
     private String email;
     private String password;
     private String status;
+    private String interests;
+    private String description;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -39,6 +41,8 @@ public class User {
         this.status = status;
     }
 
+    public void setInterests(String interests) { this.interests = interests; }
+
     public String getFirstName() {
         return firstName;
     }
@@ -57,6 +61,10 @@ public class User {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getInterests() {
+        return interests;
     }
 
 }
