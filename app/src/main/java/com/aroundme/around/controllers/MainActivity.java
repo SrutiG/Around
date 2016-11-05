@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
 
         MapBridge bride = new MapBridge();
-        new MapBridge().execute();
+        new MapBridge().execute("read");
     }
 
     public void handleMapClicked(View view) {
