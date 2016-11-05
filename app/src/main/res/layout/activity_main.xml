@@ -24,6 +24,7 @@
             android:background="@color/bottom_bar"
             android:layout_weight="0.25"
             android:layout_gravity="center"
+            android:id="@+id/map_button"
             android:onClick="handleMapClicked"/>
         <ImageButton
             android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
             android:layout_weight="0.25"
             android:background="@color/bottom_bar"
             android:layout_gravity="center"
+            android:id="@+id/feed_button"
             android:onClick="handleFeedClicked"/>
         <ImageButton
             android:layout_width="wrap_content"
@@ -40,6 +42,7 @@
             android:layout_weight="0.25"
             android:background="@color/bottom_bar"
             android:layout_gravity="center"
+            android:id="@+id/profile_button"
             android:onClick="handleProfileClicked"/>
         <ImageButton
             android:layout_width="wrap_content"
@@ -48,15 +51,16 @@
             android:layout_weight="0.25"
             android:background="@color/bottom_bar"
             android:layout_gravity="center"
+            android:id="@+id/settings_button"
             android:onClick="handleSettingsClicked"/>
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/linearLayout">
+        android:layout_below="@+id/linearLayout"
+        android:id="@+id/fragment">
 
     </FrameLayout>
 
