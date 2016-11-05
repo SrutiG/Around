@@ -8,4 +8,6 @@ public class Holder {
 
     public static LocationTracker tracker;
     public static int distance = 100;
+
+    public static String user;
 }

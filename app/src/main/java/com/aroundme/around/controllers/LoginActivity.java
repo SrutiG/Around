@@ -34,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     public void handleLoginClicked(View view) {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
-        if ((userEmail.equals("email") && userPassword.equals("pass"))) {
+        Holder.user = userEmail;
+        if (userPassword.equals("pass")) {
             SharedPreferences sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
             Editor editor = sp.edit();
             editor.putString("email", userEmail);
