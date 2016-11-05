@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/status_text"
         android:text="filler text"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:gravity="center"
         />
 

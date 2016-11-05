@@ -1,16 +1,14 @@
 package com.aroundme.around.controllers;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.aroundme.around.R;
 import com.aroundme.around.models.User;
@@ -18,8 +16,6 @@ import com.aroundme.around.models.User;
 import java.util.ArrayList;
 
 import static android.view.View.GONE;
-import static com.aroundme.around.R.id.status;
-import static com.aroundme.around.R.id.status_enter;
 
 /**
  * Created by Sruti on 11/5/16.
@@ -28,6 +24,7 @@ import static com.aroundme.around.R.id.status_enter;
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> {
 
     private ArrayList<User> users;
+    private MainActivity main;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -45,24 +42,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             message = (Button) view.findViewById(R.id.messageBT);
             view_profile = (Button) view.findViewById(R.id.profileBT);
             comment = (Button) view.findViewById(R.id.commentBT);
-            message.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
-            view_profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            comment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
             feed_options.setVisibility(GONE);
             view.setOnClickListener(this);
 
@@ -83,6 +63,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         this.users = users;
     }
 
+    public void setMain(MainActivity main) {
+        this.main = main;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View v = LayoutInflater.from(parent.getContext())
@@ -95,9 +79,31 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         User user = users.get(position);
+        final String email = user.getEmail();
         holder.profile_pic.setImageResource(R.drawable.ic_headshot);
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_message.setText(user.getStatus());
+        holder.message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        holder.view_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProfileSettingsFragment profile = new ProfileSettingsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("email", email);
+                profile.setArguments(bundle);
+                //main.setFragment(profile);
+            }
+        });
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
