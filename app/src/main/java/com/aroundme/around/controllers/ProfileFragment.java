@@ -2,6 +2,12 @@ package com.aroundme.around.controllers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,11 +55,11 @@ public class ProfileFragment extends Fragment {
 
         URL url;
         try {
-            Profile p = new ProfileLoader().execute("1").get();
+            Profile p = new ProfileLoader().execute("" + Holder.id).get();
             ImageView finder = (ImageView) v.findViewById(R.id.picture);
-            Picasso.with(getContext()).load(p.getImg()).into(finder);
+            Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
 
-            ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + " " + p.getLastName());
+            ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
             ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
             ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
 
@@ -65,6 +71,25 @@ public class ProfileFragment extends Fragment {
 
 
         return v;
+    }
+
+    private Bitmap getclip(Bitmap bitmap) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(),
+                bitmap.getHeight());
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        // paint.setColor(color);
+        canvas.drawCircle(bitmap.getWidth() / 2,
+                bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
     }
 
     /**
