@@ -47,9 +47,8 @@ public class MapBridge extends AsyncTask<String, String,String> {
         timer.schedule( new TimerTask()
         {
             public void run() {
-                String username = "patrickec246";
                 try {
-                    getHtml("http://mulegame3.comxa.com/ping.php?latitude=" + Holder.tracker.getLatitude() + "&longitude=" + Holder.tracker.getLongitude() + "&user=" + username);
+                    getHtml("http://mulegame3.comxa.com/ping.php?latitude=" + Holder.tracker.getLatitude() + "&longitude=" + Holder.tracker.getLongitude() + "&user=" + Holder.user);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
