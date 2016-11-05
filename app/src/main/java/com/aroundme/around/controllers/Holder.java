@@ -7,4 +7,5 @@ package com.aroundme.around.controllers;
 public class Holder {
 
     public static LocationTracker tracker;
+    public static int distance = 100;
 }

@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.Database;
+import com.aroundme.around.models.MapBridge;
 
 public class MainActivity extends FragmentActivity {
 
@@ -35,6 +37,8 @@ public class MainActivity extends FragmentActivity {
         FeedFragment profile = new FeedFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
 
+        MapBridge bride = new MapBridge();
+        new MapBridge().execute();
     }
 
     public void handleMapClicked(View view) {
