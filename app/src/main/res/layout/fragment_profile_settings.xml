@@ -25,6 +25,7 @@
                 android:gravity="center"
                 android:textSize="25sp"
                 android:id="@+id/full_name"
+                android:textColor="@color/Header"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"/>
             <Spinner
                 android:layout_width="300dp"
@@ -43,14 +44,17 @@
                     android:layout_height="wrap_content"
                     android:hint="Enter Status"
                     android:layout_weight="0.75"
-                    android:id="@+id/status"/>
+                    android:id="@+id/status"
+                    android:textColor="@color/text"/>
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="OK"
                     android:layout_weight="0.25"
                     android:id="@+id/enter_status"
-                    android:onClick="enterStatus"/>
+                    android:onClick="enterStatus"
+                    android:background="@color/button"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -64,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="University:"
                     android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
                     />
                 <EditText
                     android:layout_width="wrap_content"
@@ -71,6 +76,7 @@
                     android:text="Georgia Institute of Technology"
                     android:textSize="15sp"
                     android:id="@+id/universityTV"
+                    android:textColor="@color/text"
                     />
             </LinearLayout>
 
@@ -80,32 +86,37 @@
                 android:layout_height="wrap_content"
                 android:text="Description:"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"/>
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="My description goes here..."
                 android:textSize="15sp"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:id="@+id/descriptionTV"/>
+                android:id="@+id/descriptionTV"
+                android:textColor="@color/text"/>
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Interests:"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"/>
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Running Coding Traveling Watching Netflix"
                 android:textSize="15sp"
                 android:id="@+id/interestsTV"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:textColor="@color/text"/>
             <Button
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Submit"
                 android:id="@+id/submitBT"
+                android:background="@color/button"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"/>
         </LinearLayout>
 

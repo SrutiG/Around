@@ -6,10 +6,11 @@
 >
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -25,14 +26,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Firstname Lastname"
-                android:textSize="20sp"
-                android:id="@+id/name"/>
+                android:text="status message here"
+                android:textSize="16sp"
+                android:id="@+id/status_message"
+                android:textColor="@color/colorPrimaryDark"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="status message here"
-                android:id="@+id/status_message"/>
+                android:text="Firstname Lastname"
+                android:textSize="10sp"
+                android:id="@+id/name"
+                android:textColor="@color/colorAccent"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -40,24 +45,36 @@
         android:layout_height="wrap_content"
         android:weightSum="9"
         android:orientation="horizontal"
-        android:id="@+id/feed_options">
-        <Button
+        android:id="@+id/feed_options"
+        android:background="@color/colorPrimary"
+        android:padding="10dp">
+        <ImageButton
             android:layout_width="0dp"
+            android:background="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:text="Comment"
-            android:id="@+id/commentBT"/>
-        <Button
+            android:id="@+id/commentBT"
+            android:src="@drawable/ic_comment"
+            android:scaleType="fitCenter"
+/>
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:layout_weight="3"
             android:text="Profile"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_view_profile"
             android:id="@+id/profileBT"/>
-        <Button
+        <ImageButton
             android:layout_width="0dp"
+            android:background="@color/colorPrimary"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:text="Message"
+            android:src="@drawable/ic_message"
+            android:scaleType="fitCenter"
             android:id="@+id/messageBT"/>
     </LinearLayout>
 

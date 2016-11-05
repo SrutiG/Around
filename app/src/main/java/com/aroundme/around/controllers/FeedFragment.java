@@ -52,9 +52,9 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
         User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass");
-        Sruti.setStatus("Chillin");
+        Sruti.setStatus("Can someone please teach me Javascript?");
         User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob");
-        Bob.setStatus("Bob being Bob");
+        Bob.setStatus("Looking for people to play football with");
         users.add(Sruti);
         users.add(Bob);
         feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);

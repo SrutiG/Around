@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         public TextView name, status_message;
         public ImageView profile_pic;
         public LinearLayout feed_options;
-        public Button message, view_profile, comment;
+        public ImageButton message, view_profile, comment;
 
         public MyViewHolder(View view) {
             super(view);
@@ -39,9 +40,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             name = (TextView) view.findViewById(R.id.name);
             status_message = (TextView) view.findViewById(R.id.status_message);
             feed_options = (LinearLayout) view.findViewById(R.id.feed_options);
-            message = (Button) view.findViewById(R.id.messageBT);
-            view_profile = (Button) view.findViewById(R.id.profileBT);
-            comment = (Button) view.findViewById(R.id.commentBT);
+            message = (ImageButton) view.findViewById(R.id.messageBT);
+            view_profile = (ImageButton) view.findViewById(R.id.profileBT);
+            comment = (ImageButton) view.findViewById(R.id.commentBT);
 
             feed_options.setVisibility(GONE);
             view.setOnClickListener(this);
