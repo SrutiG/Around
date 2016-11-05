@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
@@ -41,9 +43,20 @@ public class MapBridge extends AsyncTask<String, String,String> {
 
     public void pingLocation() {
         //todo fix this
-        String username = "patrickec246";
+        Timer timer = new Timer();
+        timer.schedule( new TimerTask()
+        {
+            public void run() {
+                String username = "patrickec246";
+                try {
+                    getHtml("http://mulegame3.comxa.com/ping.php?latitude=" + Holder.tracker.getLatitude() + "&longitude=" + Holder.tracker.getLongitude() + "&user=" + username);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-    }
+            }
+        }, 0, 15*(1000*1));
+       }
 
 
     public void updateNearbyUsers(int distance, double latitude, double longitude) {

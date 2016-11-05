@@ -37,8 +37,8 @@ public class MainActivity extends FragmentActivity {
         FeedFragment profile = new FeedFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, profile).commit();
 
-        MapBridge bride = new MapBridge();
         new MapBridge().execute("read");
+        new MapBridge().execute("write");
     }
 
     public void handleMapClicked(View view) {
