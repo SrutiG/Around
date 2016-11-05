@@ -1,15 +1,14 @@
-package com.aroundme.around;
+package com.aroundme.around.controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+
+import com.aroundme.around.R;
 
 public class MainActivity extends FragmentActivity {
 

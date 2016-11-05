@@ -1,4 +1,4 @@
-package com.aroundme.around;
+package com.aroundme.around.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aroundme.around.R;
 
 public class LoginActivity extends AppCompatActivity {
 
