@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
             ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
             ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
             ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
-            if (p.getStatus().equals("Do Not Disturb")) {
+            if (p.getStatus().trim().equals("Do Not Disturb")) {
                 status_ic.setImageResource(R.drawable.ic_unavailable);
             };
 
