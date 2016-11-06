@@ -13,9 +13,13 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.MapBridge;
+import com.aroundme.around.models.Status;
+import com.aroundme.around.models.StatusFetcher;
 import com.aroundme.around.models.User;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -51,15 +55,37 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
-        User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass");
-        Sruti.setStatus("Can someone please teach me Javascript?");
-        User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob");
-        Bob.setStatus("Looking for people to play football with");
-        User Potato = new User("Potato", "Salad", "potato@salad.com", "potato");
-        Potato.setStatus("Does someone want to cook potatoes with me?");
-        users.add(Potato);
-        users.add(Sruti);
-        users.add(Bob);
+
+        try {
+            System.out.println("HEY");
+            String s = new MapBridge().execute("read").get();
+            System.out.println("READ: " + s);
+            String[] splits = s.split("<br/>");
+            System.out.println(splits != null ?  splits.length :  0);
+            for (int i = 0; i < splits.length; i++) {
+                String[] subsplit = splits[i].split(" , ");
+                if (Integer.parseInt(subsplit[0]) == Holder.id) continue;
+
+                String first = subsplit[1];
+                String last = subsplit[2];
+                int id = Integer.parseInt(subsplit[0]);
+
+                Status status = new StatusFetcher().execute("" + id).get();
+
+                System.out.println("Printing: " + status.getStatus());
+
+                User user = new User(first, last, "", "");
+                user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
+                //user.setImage(status.getImage());
+                users.add(user);
+            }
+            System.out.println(s);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
         feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);
         feedManager = new LinearLayoutManager(getActivity());
         feed_list.setLayoutManager(feedManager);
@@ -67,8 +93,10 @@ public class FeedFragment extends Fragment {
         feedAdapter = new FeedAdapter(users);
         feedAdapter.setMain(main);
         feed_list.setAdapter(feedAdapter);
-        return flayout;
 
+
+
+        return flayout;
 
     }
 
