@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,15 +22,24 @@
                 android:src="@drawable/ic_action_name"
                 android:scaleType="fitCenter"
                 android:layout_margin="@dimen/activity_vertical_margin"/>
-            <TextView
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:text="Sruti Guhathakurta"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:id="@+id/full_name"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:textColor="@color/Header"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sruti Guhathakurta"
+                    android:gravity="center"
+                    android:textSize="25sp"
+                    android:id="@+id/full_name"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:textColor="@color/Header"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -37,6 +47,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/activity_vertical_margin">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,6 +59,14 @@
                     android:text="Available"
                     android:textSize="18dp"
                     android:id="@+id/status_text" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_message_text"
+                    android:id="@+id/imageButton2"
+                    android:background="?android:attr/windowBackground"
+                    android:paddingLeft="20px" />
             </LinearLayout>
 
             <TextView

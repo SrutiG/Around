@@ -46,8 +46,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
 
             feed_options.setVisibility(GONE);
             view.setOnClickListener(this);
-
-
         }
         @Override
         public void onClick(View view) {

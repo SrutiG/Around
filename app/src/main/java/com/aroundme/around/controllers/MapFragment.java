@@ -129,6 +129,14 @@ public class MapFragment extends Fragment {
                 .icon(icon).zIndex(2000);
 
         googleMap.addMarker(markerOptions);
+
+        icon = BitmapDescriptorFactory.fromResource(R.drawable.image2);
+        MarkerOptions marker2 = new MarkerOptions().position(new LatLng(33.7756178,-84.396285))
+                .title("Georgia Institute of Technology")
+                .snippet("8 people here")
+                .icon(icon);
+
+        googleMap.addMarker(marker2);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

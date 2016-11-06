@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.aroundme.around.R;
 import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.ProfileLoader;
+import com.aroundme.around.models.StatusUpdater;
 import com.aroundme.around.models.UserUpdater;
 import com.squareup.picasso.Picasso;
 
@@ -112,6 +113,8 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
 
             ImageView finder = (ImageView) flayout.findViewById(R.id.editPic);
             Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
+
+            new StatusUpdater().execute("" + Holder.id, p.getStatus(), "" + System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -137,6 +140,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
                 main.setFragment(pf);
             }
         });
+
 
         return flayout;
     }

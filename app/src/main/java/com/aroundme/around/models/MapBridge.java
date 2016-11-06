@@ -34,7 +34,7 @@ public class MapBridge extends AsyncTask<String, String,String> {
     @Override
     protected String doInBackground(String... params) {
         if (params[0].equals("read")) {
-            updateNearbyUsers(Holder.distance, Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
+            return updateNearbyUsers(Holder.distance, Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
         } else if (params[0].equals("write")) {
             pingLocation();
         }
@@ -59,15 +59,15 @@ public class MapBridge extends AsyncTask<String, String,String> {
        }
 
 
-    public void updateNearbyUsers(int distance, double latitude, double longitude) {
+    public String updateNearbyUsers(int distance, double latitude, double longitude) {
         try {
             System.out.println("pulling near " + latitude + " , " + longitude);
-            System.out.println(getHtml("http://bibliotecas.net46.net/query.php?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance));
+            return getHtml("http://bibliotecas.net46.net/query.php?latitude=" + latitude + "&longitude=" + longitude + "&distance=" + distance).split("<!", 2)[0];
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //check for distance
-        //populate nearbyUsers
+
+        return null;
     }
 
     public static String getHtml(String url) throws IOException {
