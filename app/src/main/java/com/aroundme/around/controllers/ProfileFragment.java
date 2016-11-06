@@ -26,6 +26,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+import static com.aroundme.around.R.id.status_ic;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -35,6 +37,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class ProfileFragment extends Fragment {
 
+    ImageView status_ic;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -52,6 +55,7 @@ public class ProfileFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        status_ic = (ImageView) v.findViewById(R.id.status_ic);
 
         URL url;
         try {
@@ -62,10 +66,15 @@ public class ProfileFragment extends Fragment {
             ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
             ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
             ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
+            if (p.getStatus().equals("Do Not Disturb")) {
+                status_ic.setImageResource(R.drawable.ic_unavailable);
+            };
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
