@@ -104,12 +104,12 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             Profile p = new ProfileLoader().execute("" + Holder.id).get();
 
             ((EditText) flayout.findViewById(R.id.full_name_text)).setText(p.getFirstName() + p.getLastName());
-            if ((p.getStatus() != "") && (!(p.getStatus().equals("Available")) && (!(p.getStatus().equals("Do Not Disturb"))))) {
-                statuses[3] = p.getStatus().toString();
+            if ((p.getStatus().trim() != "") && (!(p.getStatus().trim().equals("Available")) && (!(p.getStatus().trim().equals("Do Not Disturb"))))) {
+                statuses[3] = p.getStatus().trim().toString();
                 statusSpinner.setSelection(3);
-            } else if (p.getStatus().equals("Available")) {
+            } else if (p.getStatus().trim().equals("Available")) {
                 statusSpinner.setSelection(0);
-            } else if (p.getStatus().equals("Do Not Disturb")) {
+            } else if (p.getStatus().trim().equals("Do Not Disturb")) {
                 statusSpinner.setSelection(1);
             }
             //((EditText) flayout.findViewById(R.id.descriptionET)).setText(p.getDescription());
