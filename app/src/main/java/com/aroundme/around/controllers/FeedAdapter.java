@@ -12,12 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
-import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import static android.view.View.GONE;
 

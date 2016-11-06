@@ -1,18 +1,14 @@
 package com.aroundme.around.models;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-
-import com.aroundme.around.controllers.Holder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * Created by patrickcaruso on 11/5/16.
@@ -23,7 +19,7 @@ public class UserAdder extends AsyncTask<String, Void, String>  {
     @Override
     protected String doInBackground(String... params) {
         try {
-            getHtml("http://bibliotecas.net46.net/addUser.php?first=" + params[0] + "&last=" + params[1] + "&email=" + params[2] + "&pass=" + params[3]);
+            getHtml("http://bibliotecas.net46.net/addUser.php?first=" + URLEncoder.encode(params[0], "UTF-8") + "&last=" + URLEncoder.encode(params[1], "UTF-8") + "&email=" + URLEncoder.encode(params[2], "UTF-8") + "&pass=" + URLEncoder.encode(params[3], "UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }

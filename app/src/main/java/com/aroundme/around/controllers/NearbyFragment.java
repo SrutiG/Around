@@ -1,6 +1,5 @@
 package com.aroundme.around.controllers;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,20 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.aroundme.around.R;
 import com.aroundme.around.models.MapBridge;
 import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.ProfileLoader;
-import com.aroundme.around.models.Status;
-import com.aroundme.around.models.StatusFetcher;
 import com.aroundme.around.models.User;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
-import static com.aroundme.around.controllers.Holder.user;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,8 +38,6 @@ public class NearbyFragment extends Fragment {
     public NearbyFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,9 +61,6 @@ public class NearbyFragment extends Fragment {
             int i = Integer.parseInt(entries[0].trim());
             String firstName = entries[1];
             String lastName = entries[2];
-            double lat = Double.parseDouble(entries[3].trim());
-            double lon = Double.parseDouble(entries[4].trim());
-            double distance = Double.parseDouble(entries[5].trim());
 
             User user = new User(i, firstName, lastName, null, null, null);
             try {

@@ -1,19 +1,14 @@
 package com.aroundme.around.controllers;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +22,8 @@ import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.ProfileLoader;
 import com.squareup.picasso.Picasso;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
-
-import static com.aroundme.around.R.id.status_ic;
 
 /**
  * A simple {@link Fragment} subclass.

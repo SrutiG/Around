@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
@@ -15,11 +13,6 @@ import com.aroundme.around.models.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import static android.view.View.GONE;
-import static com.aroundme.around.R.id.feed_options;
-import static com.aroundme.around.R.id.name_nearby;
-import static com.aroundme.around.R.id.profile_pic;
 
 /**
  * Created by Sruti on 11/5/16.

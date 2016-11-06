@@ -6,11 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.aroundme.around.models.MapBridge;
@@ -49,6 +51,7 @@ public class FeedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -56,29 +59,67 @@ public class FeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
 
-        try {
-            String s = new MapBridge().execute("read").get();
-            String[] splits = s.split("<br/>");
-            System.out.println(splits != null ?  splits.length :  0);
-            for (int i = 0; i < splits.length; i++) {
-                String[] subsplit = splits[i].split(" , ");
 
-                String first = subsplit[1];
-                String last = subsplit[2];
-                int id = Integer.parseInt(subsplit[0]);
+        if (getArguments() != null && getArguments().getString("title") != null
+                && getArguments().getString("title").length() > 0) {
+            System.out.println(getArguments().getDouble("lat"));
+            ((TextView)flayout.findViewById(R.id.toptext)).setText(getArguments().getString("title"));
+            ((EditText)flayout.findViewById(R.id.fledit)).setVisibility(View.INVISIBLE);
+            ((ImageView)flayout.findViewById(R.id.pencil)).setVisibility(View.INVISIBLE);
 
-                Status status = new StatusFetcher().execute("" + id).get();
+            try {
+                String s = new MapBridge().execute("custom", "100", "" + getArguments().getDouble("lat"), "" + getArguments().getDouble("lon")).get();
+                String[] splits = s.split("<br/>");
+                System.out.println(splits != null ? splits.length : 0);
+                for (int i = 0; i < splits.length; i++) {
+                    String[] subsplit = splits[i].split(" , ");
+                    if (subsplit.length > 1) {
+                        String first = subsplit[1];
+                        String last = subsplit[2];
+                        int id = Integer.parseInt(subsplit[0]);
 
-                User user = new User(id, first, last, "", "", status.getImage());
-                user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
-                //user.setImage(status.getImage());
-                users.add(user);
+                        Status status = new StatusFetcher().execute("" + id).get();
+
+                        User user = new User(id, first, last, "", "", status.getImage());
+                        user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
+                        //user.setImage(status.getImage());
+                        users.add(user);
+                    }
+                }
+                System.out.println(s);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-            System.out.println(s);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        } else {
+            try {
+                ((EditText)flayout.findViewById(R.id.fledit)).setVisibility(View.VISIBLE);
+                ((ImageView)flayout.findViewById(R.id.pencil)).setVisibility(View.VISIBLE);
+
+                String s = new MapBridge().execute("read").get();
+                String[] splits = s.split("<br/>");
+                System.out.println(splits != null ? splits.length : 0);
+                for (int i = 0; i < splits.length; i++) {
+                    String[] subsplit = splits[i].split(" , ");
+
+                    String first = subsplit[1];
+                    String last = subsplit[2];
+                    int id = Integer.parseInt(subsplit[0]);
+
+                    Status status = new StatusFetcher().execute("" + id).get();
+
+                    User user = new User(id, first, last, "", "", status.getImage());
+                    user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
+                    //user.setImage(status.getImage());
+                    users.add(user);
+                }
+                System.out.println(s);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
 
         feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);

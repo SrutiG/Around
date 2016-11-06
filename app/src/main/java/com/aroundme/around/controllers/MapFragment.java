@@ -1,22 +1,14 @@
 package com.aroundme.around.controllers;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,15 +19,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.GroundOverlay;
-import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.VisibleRegion;
 
 
 /**
@@ -50,10 +37,14 @@ public class MapFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
-
+    private MainActivity main;
 
     public MapFragment() {
         // Required empty public constructor
+    }
+
+    public void setMain(MainActivity main) {
+        this.main = main;
     }
 
     // TODO: Rename and change types and number of parameters
@@ -145,6 +136,35 @@ public class MapFragment extends Fragment {
                 .icon(icon);
 
         googleMap.addMarker(marker3);
+
+        icon = BitmapDescriptorFactory.fromResource(R.drawable.image4);
+        MarkerOptions marker4 = new MarkerOptions().position(new LatLng(33.786269, -84.375945))
+                .title("Piedmont Park")
+                .snippet("23 people here")
+                .icon(icon);
+
+        googleMap.addMarker(marker4);
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker arg0) {
+                LatLng loc = arg0.getPosition();
+                String place = arg0.getTitle();
+                Bundle bundle = new Bundle();
+                bundle.putDouble("lat", loc.latitude);
+                bundle.putDouble("lon", loc.longitude);
+                bundle.putString("title", place);
+
+                Fragment frag = new FeedFragment();
+                System.out.println(" : " + bundle.getDouble("lat"));
+                frag.setArguments(bundle);
+
+                System.out.println("YEP: " + main == null);
+                main.setFragment(frag);
+            }
+        });
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
