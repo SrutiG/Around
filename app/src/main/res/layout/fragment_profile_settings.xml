@@ -17,8 +17,15 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_action_name"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:id="@+id/editPic" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:id="@+id/edit_pic"
+                android:text="Edit Picture"
+                android:textSize="10sp"
+                android:background="@color/button"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
             <EditText
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"

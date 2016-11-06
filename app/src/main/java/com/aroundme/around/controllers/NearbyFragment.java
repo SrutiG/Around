@@ -40,6 +40,7 @@ public class NearbyFragment extends Fragment {
     private NearbyAdapter nearbyAdapter;
     private RecyclerView.LayoutManager nearbyManager;
     private ArrayList<User> users = new ArrayList<>();
+    private MainActivity main;
 
     public NearbyFragment() {
         // Required empty public constructor
@@ -92,19 +93,25 @@ public class NearbyFragment extends Fragment {
         nearbyManager = new LinearLayoutManager(getActivity());
         people_list.setLayoutManager(nearbyManager);
         nearbyAdapter = new NearbyAdapter(users, getContext());
+        nearbyAdapter.setMain(main);
         people_list.setAdapter(nearbyAdapter);
         FloatingActionButton action = (FloatingActionButton) flayout.findViewById(R.id.fab);
         action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, new MapFragment(), "MapFragment");
+                MapFragment mf = new MapFragment();
+                mf.setMain(main);
+                ft.replace(R.id.fragment, mf, "MapFragment");
                 ft.commit();
             }
         });
         return flayout;
     }
 
+    public void setMain(MainActivity main) {
+        this.main = main;
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

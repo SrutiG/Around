@@ -1,5 +1,6 @@
 package com.aroundme.around.controllers;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -47,7 +49,7 @@ public class MainActivity extends FragmentActivity {
         fragment = (FrameLayout) findViewById(R.id.fragment);
         sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         MapFragment map = new MapFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment, map).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment, map).addToBackStack(null).commit();
 
         new MapBridge().execute("read");
         new MapBridge().execute("write");
@@ -55,18 +57,20 @@ public class MainActivity extends FragmentActivity {
 
     public void handleMapClicked(View view) {
         MapFragment map = new MapFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, map).commit();
+        map.setMain(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, map).addToBackStack(null).commit();
     }
 
     public void handleFeedClicked(View view) {
         FeedFragment feed = new FeedFragment();
         feed.setMain(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, feed).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, feed).addToBackStack(null).commit();
     }
 
     public void handleProfileClicked(View view) {
         ProfileFragment profile = new ProfileFragment();
-         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).commit();
+        profile.setMain(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).addToBackStack(null).commit();
 
 
 
@@ -75,7 +79,7 @@ public class MainActivity extends FragmentActivity {
     public void handleSettingsClicked(View view) {
         ProfileSettingsFragment profileSet = new ProfileSettingsFragment();
         profileSet.setMain(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileSet).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileSet).addToBackStack(null).commit();
     }
 
     public void handleMessageClicked(View view) {
@@ -85,8 +89,9 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void setFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
     }
+
 
 
 }

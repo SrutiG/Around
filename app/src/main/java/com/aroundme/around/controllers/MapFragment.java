@@ -50,6 +50,7 @@ public class MapFragment extends Fragment {
 
     MapView mMapView;
     private GoogleMap googleMap;
+    private MainActivity main;
 
 
     public MapFragment() {
@@ -110,13 +111,19 @@ public class MapFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, new NearbyFragment(), "NearbyFragment");
+                NearbyFragment nf = new NearbyFragment();
+                nf.setMain(main);
+                ft.replace(R.id.fragment, nf, "NearbyFragment");
                 ft.commit();
             }
         });
 
 
         return rootView;
+    }
+
+    public void setMain(MainActivity main) {
+        this.main = main;
     }
 
     private void loadMarkers(GoogleMap map, MapView mapView) {

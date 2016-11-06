@@ -36,6 +36,7 @@ public class FeedFragment extends Fragment {
     private RecyclerView.LayoutManager feedManager;
     private ArrayList<User> users = new ArrayList<>();
     private MainActivity main;
+    private FrameLayout flayout;
 
     public FeedFragment() {
         // Required empty public constructor
@@ -54,40 +55,43 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
+        if (flayout == null) {
+            flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
 
-        try {
-            String s = new MapBridge().execute("read").get();
-            String[] splits = s.split("<br/>");
-            System.out.println(splits != null ?  splits.length :  0);
-            for (int i = 0; i < splits.length; i++) {
-                String[] subsplit = splits[i].split(" , ");
+            try {
+                String s = new MapBridge().execute("read").get();
+                String[] splits = s.split("<br/>");
+                System.out.println(splits != null ?  splits.length :  0);
+                for (int i = 0; i < splits.length; i++) {
+                    String[] subsplit = splits[i].split(" , ");
 
-                String first = subsplit[1];
-                String last = subsplit[2];
-                int id = Integer.parseInt(subsplit[0]);
+                    String first = subsplit[1];
+                    String last = subsplit[2];
+                    int id = Integer.parseInt(subsplit[0]);
 
-                Status status = new StatusFetcher().execute("" + id).get();
+                    Status status = new StatusFetcher().execute("" + id).get();
 
-                User user = new User(id, first, last, "", "", status.getImage());
-                user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
-                //user.setImage(status.getImage());
-                users.add(user);
+                    User user = new User(id, first, last, "", "", status.getImage());
+                    user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
+                    //user.setImage(status.getImage());
+                    users.add(user);
+                }
+                System.out.println(s);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-            System.out.println(s);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+
+            feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);
+            feedManager = new LinearLayoutManager(getActivity());
+            feed_list.setLayoutManager(feedManager);
+            feed_list.setItemAnimator(new DefaultItemAnimator());
+            feedAdapter = new FeedAdapter(users, getContext());
+            feedAdapter.setMain(main);
+            feed_list.setAdapter(feedAdapter);
         }
 
-        feed_list = (RecyclerView) flayout.findViewById(R.id.feed_list);
-        feedManager = new LinearLayoutManager(getActivity());
-        feed_list.setLayoutManager(feedManager);
-        feed_list.setItemAnimator(new DefaultItemAnimator());
-        feedAdapter = new FeedAdapter(users, getContext());
-        feedAdapter.setMain(main);
-        feed_list.setAdapter(feedAdapter);
 
 
 

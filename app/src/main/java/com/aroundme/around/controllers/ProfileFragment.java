@@ -13,7 +13,9 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+import static android.os.Build.VERSION_CODES.M;
 import static com.aroundme.around.R.id.status_ic;
 
 /**
@@ -46,10 +49,14 @@ public class ProfileFragment extends Fragment {
     int person_id;
     ImageButton message_user, star_ic;
     Button backButton;
+    private MainActivity main;
+    private View v;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
+
+    public void setMain(MainActivity main) { this.main = main; }
 
     public static ProfileFragment newInstance(int person_id) {
         ProfileFragment profileFragment = new ProfileFragment();
@@ -77,68 +84,73 @@ public class ProfileFragment extends Fragment {
         if (getArguments() != null) {
             person_id = getArguments().getInt("person_id");
         }
-        View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        status_ic = (ImageView) v.findViewById(R.id.status_ic);
-        message_user = (ImageButton) v.findViewById(R.id.message_user);
-        star_ic = (ImageButton) v.findViewById(R.id.star_ic);
-        backButton = (Button) v.findViewById(R.id.backButton);
-        message_user.setVisibility(View.GONE);
-        star_ic.setVisibility(View.GONE);
-        backButton.setVisibility(View.GONE);
+        if (v == null) {
+            v = inflater.inflate(R.layout.fragment_profile, container, false);
+            status_ic = (ImageView) v.findViewById(R.id.status_ic);
+            message_user = (ImageButton) v.findViewById(R.id.message_user);
+            star_ic = (ImageButton) v.findViewById(R.id.star_ic);
+            backButton = (Button) v.findViewById(R.id.backButton);
+            message_user.setVisibility(View.GONE);
+            star_ic.setVisibility(View.GONE);
+            backButton.setVisibility(View.GONE);
 
 
-        URL url;
-        try {
-            Profile p;
-            if (person_id == 0) {
-                p = new ProfileLoader().execute("" + Holder.id).get();
-            } else {
-                p = new ProfileLoader().execute("" + person_id).get();
-            }
-            ImageView finder = (ImageView) v.findViewById(R.id.picture);
-            Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
+            URL url;
+            try {
+                Profile p;
+                if ((person_id == 0) || (person_id == Holder.id)) {
+                    p = new ProfileLoader().execute("" + Holder.id).get();
+                } else {
+                    p = new ProfileLoader().execute("" + person_id).get();
+                }
+                ImageView finder = (ImageView) v.findViewById(R.id.picture);
+                Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
 
-            ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
-            ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
-            ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
-            if (person_id != 0) {
-                star_ic.setVisibility(View.VISIBLE);
-                backButton.setVisibility(View.VISIBLE);
-                backButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {getActivity().onBackPressed();
-                    }
-                });
-                star_ic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    if (star_ic.getDrawable().equals(R.drawable.ic_star_empty)) {
-                        star_ic.setImageResource(R.drawable.ic_star_full);
-                    } else if (star_ic.getDrawable().equals(R.drawable.ic_star_full)) {
-                        star_ic.setImageResource(R.drawable.ic_star_empty);
-                    }
-                    }
-                });
-                if (!(p.getStatus().trim().equals("Do Not Disturb"))) {
-                    message_user.setVisibility(View.VISIBLE);
-                    message_user.setOnClickListener(new View.OnClickListener() {
+                ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
+                ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
+                ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
+                if (person_id != 0 && person_id != Holder.id) {
+                    star_ic.setVisibility(View.VISIBLE);
+                    backButton.setVisibility(View.VISIBLE);
+                    backButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            fm.popBackStack();
                         }
                     });
-                }
-            }
-            if (p.getStatus().trim().equals("Do Not Disturb")) {
-                status_ic.setImageResource(R.drawable.ic_unavailable);
-            };
+                    star_ic.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (star_ic.getDrawable().equals(R.drawable.ic_star_empty)) {
+                                star_ic.setImageResource(R.drawable.ic_star_full);
+                            } else if (star_ic.getDrawable().equals(R.drawable.ic_star_full)) {
+                                star_ic.setImageResource(R.drawable.ic_star_empty);
+                            }
+                        }
+                    });
+                    if (!(p.getStatus().trim().equals("Do Not Disturb"))) {
+                        message_user.setVisibility(View.VISIBLE);
+                        message_user.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+                if (p.getStatus().trim().equals("Do Not Disturb")) {
+                    status_ic.setImageResource(R.drawable.ic_unavailable);
+                };
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
 

@@ -102,9 +102,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
             public void onClick(View view) {
                 ProfileFragment profile = new ProfileFragment();
                 Bundle bundle = new Bundle();
-                System.out.println("id: " + id);
                 bundle.putInt("person_id", id);
                 profile.setArguments(bundle);
+                profile.setMain(main);
                 main.setFragment(profile);
             }
         });

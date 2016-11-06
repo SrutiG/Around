@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +30,13 @@ import com.aroundme.around.models.StatusUpdater;
 import com.aroundme.around.models.UserUpdater;
 import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
+import static android.R.id.edit;
+import static android.app.Activity.RESULT_OK;
+import static com.aroundme.around.R.id.edit_pic;
 import static com.aroundme.around.R.id.status_spinner;
 
 
@@ -38,8 +47,9 @@ import static com.aroundme.around.R.id.status_spinner;
 public class ProfileSettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     Spinner statusSpinner;
-    Button enter_status;
+    Button enter_status, edit_pic;
     EditText status;
+    ImageView editPic;
     TextView logoutBT;
     LinearLayout status_enter;
     MainActivity main;
@@ -65,7 +75,16 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
         status_enter = (LinearLayout) flayout.findViewById(R.id.status_enter);
         status = (EditText) flayout.findViewById(R.id.status);
         enter_status = (Button) flayout.findViewById(R.id.enter_status);
+        edit_pic = (Button) flayout.findViewById(R.id.edit_pic);
         logoutBT = (TextView) flayout.findViewById(R.id.logoutBT);
+        editPic = (ImageView) flayout.findViewById(R.id.editPic);
+
+//        edit_pic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openGallery(SELECT_FILE1);
+//            }
+//        });
         enter_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +136,13 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
 
             ImageView finder = (ImageView) flayout.findViewById(R.id.editPic);
             Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
+            if(!p.getImg().equals("")) {
+                try {
+                    editPic.setImageDrawable(grabImageFromUrl(p.getImg()));
+                } catch(Exception e) {
+
+                }
+            }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -168,5 +194,50 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
 
     public void onNothingSelected(AdapterView<?> arg0) {
     }
+
+//    public void openGallery(int req_code) {
+//
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent,
+//                "Select file to upload "), req_code);
+//    }
+//
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        if (resultCode == RESULT_OK) {
+//            Uri selectedImageUri = data.getData();
+//
+//            if (requestCode == SELECT_FILE1) {
+//                selectedPath1 = getPath(selectedImageUri);
+//                System.out.println("selectedPath1 : " + selectedPath1);
+//            }
+//
+//            if (requestCode == SELECT_FILE2) {
+//                selectedPath2 = getPath(selectedImageUri);
+//                System.out.println("selectedPath2 : " + selectedPath2);
+//            }
+//
+//            tv.setText("Selected File paths : " + selectedPath1 + "," + selectedPath2);
+//        }
+//    }
+//
+//    public String getPath(Uri uri) {
+//
+//        String[] projection = { MediaStore.Images.Media.DATA };
+//        Cursor cursor = managedQuery(uri, projection, null, null, null);
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//
+//        return cursor.getString(column_index);
+//    }
+
+
+
+    private Drawable grabImageFromUrl(String url) throws Exception {
+        return Drawable.createFromStream((InputStream)new URL(url).getContent(), "src");
+    }
+
 
 }
