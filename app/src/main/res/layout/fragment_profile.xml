@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.aroundme.around.controllers.ProfileFragment">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -46,13 +47,16 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin">
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:id="@+id/status_ic"
-                    android:src="@drawable/ic_available" />
+                    android:src="@drawable/ic_available"
+                    android:scaleType="fitCenter"
+                    android:layout_marginRight="15dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,12 +65,15 @@
                     android:id="@+id/status_text" />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_message_text"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_message_text"
                     android:id="@+id/imageButton2"
+                    android:visibility="visible"
                     android:background="?android:attr/windowBackground"
-                    android:paddingLeft="20px" />
+                    android:layout_marginLeft="15dp"
+                    android:scaleType="fitCenter"/>
+
             </LinearLayout>
 
             <TextView
@@ -104,7 +111,9 @@
                 android:text="Description:"
                 android:textStyle="bold"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark"
+                android:id="@+id/textView" />
+
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -112,6 +121,7 @@
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:textColor="@color/text"
                 />
+
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"

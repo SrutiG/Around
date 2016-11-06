@@ -13,12 +13,16 @@ public class User {
     private String status;
     private String interests;
     private String description;
+    private String image;
 
-    public User(String firstName, String lastName, String email, String password) {
+
+
+    public User(String firstName, String lastName, String email, String password, String image) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.image = image;
     }
 
     public void setFirstName(String firstName) {
@@ -65,6 +69,15 @@ public class User {
 
     public String getInterests() {
         return interests;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getDescription() {
+
+        return description;
     }
 
 }
