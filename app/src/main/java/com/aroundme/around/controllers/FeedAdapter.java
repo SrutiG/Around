@@ -6,14 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
-import com.aroundme.around.models.ImageLoader;
 import com.aroundme.around.models.User;
 import com.squareup.picasso.Picasso;
 
@@ -21,8 +19,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static android.view.View.GONE;
-import static com.aroundme.around.R.id.profile_pic;
-import static java.lang.System.load;
 
 /**
  * Created by Sruti on 11/5/16.
@@ -79,6 +75,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.feed_item, parent, false);
 
+
         return new MyViewHolder(v);
     }
 
@@ -89,8 +86,10 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         final String email = user.getEmail();
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_message.setText(user.getStatus());
-        System.out.println("Image: " + user.getImage() + " " + context == null);
-        Picasso.with(context).load(user.getImage()).into(holder.profile_pic);
+        Picasso.with(context).load(user.getImage().split("<br", 2)[0].trim()).into(holder.profile_pic);
+        //
+        //System.out.println(holder.profile_pic.getDrawingCache().getWidth());
+
 
         holder.message.setOnClickListener(new View.OnClickListener() {
             @Override
