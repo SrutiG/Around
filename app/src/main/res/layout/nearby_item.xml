@@ -20,29 +20,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sruti Guhathakurta"
-                android:id="@+id/name_nearby"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sruti Guhathakurta"
+                    android:id="@+id/name_nearby"
+                    android:textSize="20dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/colorPrimaryDark"/>
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/ic_available"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/status_ic"
-                    android:src="@drawable/ic_available"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/status_nearby"
                     android:text="Available"
-                    android:textSize="12dp"
+                    android:textSize="13sp"
                     android:textColor="@color/Header"/>
             </LinearLayout>
             <TextView

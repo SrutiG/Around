@@ -29,6 +29,7 @@ public class MainActivity extends FragmentActivity {
     ImageButton feed_button;
     ImageButton profile_button;
     ImageButton settings_button;
+    ImageButton message_button;
     SharedPreferences sp;
     FrameLayout fragment;
 
@@ -42,6 +43,7 @@ public class MainActivity extends FragmentActivity {
         feed_button = (ImageButton) findViewById(R.id.feed_button);
         profile_button = (ImageButton) findViewById(R.id.profile_button);
         settings_button = (ImageButton) findViewById(R.id.settings_button);
+        message_button = (ImageButton) findViewById(R.id.message_button);
         fragment = (FrameLayout) findViewById(R.id.fragment);
         sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         MapFragment map = new MapFragment();
@@ -74,6 +76,12 @@ public class MainActivity extends FragmentActivity {
         ProfileSettingsFragment profileSet = new ProfileSettingsFragment();
         profileSet.setMain(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileSet).commit();
+    }
+
+    public void handleMessageClicked(View view) {
+        MessageFragment message = new MessageFragment();
+        setFragment(message);
+
     }
 
     public void setFragment(Fragment fragment) {

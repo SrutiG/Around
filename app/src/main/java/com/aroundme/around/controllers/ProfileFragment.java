@@ -38,15 +38,28 @@ import static com.aroundme.around.R.id.status_ic;
 public class ProfileFragment extends Fragment {
 
     ImageView status_ic;
+    int person_id;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
+    public static ProfileFragment newInstance(int person_id) {
+        ProfileFragment profileFragment = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("person_id", person_id);
+        profileFragment.setArguments(bundle);
+        return profileFragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            person_id = getArguments().getInt("person_id");
+        }
     }
 
     @Override
