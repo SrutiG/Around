@@ -25,7 +25,7 @@ public class UserUpdater extends AsyncTask<String, Void, Integer>  {
     @Override
     protected Integer doInBackground(String... params) {
         try {
-            getHtml("http://bibliotecas.net46.net/updateProfile.php?id=" + URLEncoder.encode(params[0].trim(), "UTF-8") + "&first_name=" + URLEncoder.encode(params[1].trim(), "UTF-8")  + "&last_name=" + URLEncoder.encode(params[2].trim(), "UTF-8")  + "&interests=" + URLEncoder.encode(params[3].trim(), "UTF-8") );
+            getHtml("http://bibliotecas.net46.net/updateProfile.php?id=" + URLEncoder.encode(params[0].trim(), "UTF-8") + "&first_name=" + URLEncoder.encode(params[1].trim(), "UTF-8")  + "&last_name=" + URLEncoder.encode(params[2].trim(), "UTF-8")  + "&interests=" + URLEncoder.encode(params[3].trim(), "UTF-8") + "&status=" + URLEncoder.encode(params[4].trim(), "UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
 

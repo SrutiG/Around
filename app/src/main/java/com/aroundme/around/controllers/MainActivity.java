@@ -72,6 +72,7 @@ public class MainActivity extends FragmentActivity {
 
     public void handleSettingsClicked(View view) {
         ProfileSettingsFragment profileSet = new ProfileSettingsFragment();
+        profileSet.setMain(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profileSet).commit();
     }
 

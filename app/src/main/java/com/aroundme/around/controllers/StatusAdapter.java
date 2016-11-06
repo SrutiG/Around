@@ -53,6 +53,7 @@ public class StatusAdapter extends ArrayAdapter {
         return convertView;
 
     }
+
     //Override the getCount() because we are passing object as null in constructor
     //getCount() determines how many times the getView should b called
     @Override

@@ -51,6 +51,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/status_ic"
                     android:src="@drawable/ic_available" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,7 +111,7 @@
                 android:text="Hey! My name is blah and I come from blah and enjot blahing."
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:textColor="@color/text"
-                android:id="@+id/interests" />
+                />
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
@@ -122,7 +123,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Running Coding Traveling Watching Netflix"
-                android:textColor="@color/text"/>
+                android:textColor="@color/text"
+                android:id="@+id/interests"/>
         </LinearLayout>
 
 

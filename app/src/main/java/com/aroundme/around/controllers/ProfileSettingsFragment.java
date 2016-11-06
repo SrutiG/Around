@@ -28,6 +28,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.ExecutionException;
 
+import static com.aroundme.around.R.id.status_spinner;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +42,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
     EditText status;
     TextView logoutBT;
     LinearLayout status_enter;
+    MainActivity main;
     String[] statuses = {"Available", "Do Not Disturb", "Custom...", null};
 
 
@@ -47,7 +50,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
         // Required empty public constructor
     }
 
-
+    public void setMain(MainActivity main) { this.main = main; }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             }
         });
         status_enter.setVisibility(View.GONE);
-        statusSpinner = (Spinner) flayout.findViewById(R.id.status_spinner);
+        statusSpinner = (Spinner) flayout.findViewById(status_spinner);
         int[] images = {R.drawable.ic_available, R.drawable.ic_unavailable};
         StatusAdapter arrayAdapter = new StatusAdapter(super.getActivity(), R.layout.status_item, statuses, images);
         arrayAdapter.setDropDownViewResource(R.layout.status_item);
@@ -101,7 +104,10 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             Profile p = new ProfileLoader().execute("" + Holder.id).get();
 
             ((EditText) flayout.findViewById(R.id.full_name_text)).setText(p.getFirstName() + p.getLastName());
-            //((Spinner) flayout.findViewById(R.id.status_spinner)).setText(p.getStatus());
+            if (p.getStatus() != "") {
+                statuses[3] = p.getStatus().toString();
+                statusSpinner.setSelection(3);
+            }
             //((EditText) flayout.findViewById(R.id.descriptionET)).setText(p.getDescription());
             ((EditText) flayout.findViewById(R.id.interestsET)).setText(p.getInterests());
 
@@ -112,9 +118,12 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         final View flayout2 = flayout;
+        final ProfileFragment pf = new ProfileFragment();
 
         ((Button) flayout.findViewById(R.id.submitBT)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +132,12 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
                 String s = ((EditText) flayout2.findViewById(R.id.full_name_text)).getText().toString();
                 if (s.indexOf(" ") > 0) {
                     new UserUpdater().execute("" + Holder.id, s.split(" ", 2)[0], s.split(" ", 2)[1],
-                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString());
+                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString(), ((Spinner) flayout2.findViewById(R.id.status_spinner)).getSelectedItem().toString());
                 } else {
                     new UserUpdater().execute("" + Holder.id, s, "",
-                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString());
+                            ((EditText) flayout2.findViewById(R.id.interestsET)).getText().toString(), ((Spinner) flayout2.findViewById(R.id.status_spinner)).getSelectedItem().toString());
                 }
+                main.setFragment(pf);
             }
         });
 
