@@ -100,7 +100,7 @@ public class MapFragment extends Fragment {
                 //googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
@@ -137,6 +137,14 @@ public class MapFragment extends Fragment {
                 .icon(icon);
 
         googleMap.addMarker(marker2);
+
+        icon = BitmapDescriptorFactory.fromResource(R.drawable.image3);
+        MarkerOptions marker3 = new MarkerOptions().position(new LatLng(33.770088, -84.390973))
+                .title("North Avenue Apartments")
+                .snippet("1 person here")
+                .icon(icon);
+
+        googleMap.addMarker(marker3);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

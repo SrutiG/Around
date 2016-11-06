@@ -57,22 +57,18 @@ public class FeedFragment extends Fragment {
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_feed, container, false);
 
         try {
-            System.out.println("HEY");
             String s = new MapBridge().execute("read").get();
-            System.out.println("READ: " + s);
+
             String[] splits = s.split("<br/>");
             System.out.println(splits != null ?  splits.length :  0);
             for (int i = 0; i < splits.length; i++) {
                 String[] subsplit = splits[i].split(" , ");
-                if (Integer.parseInt(subsplit[0]) == Holder.id) continue;
 
                 String first = subsplit[1];
                 String last = subsplit[2];
                 int id = Integer.parseInt(subsplit[0]);
 
                 Status status = new StatusFetcher().execute("" + id).get();
-
-                System.out.println("Printing: " + status.getStatus());
 
                 User user = new User(first, last, "", "");
                 user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
