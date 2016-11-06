@@ -31,6 +31,7 @@ public class UserAdder extends AsyncTask<String, Void, String>  {
     }
 
     public String getHtml(String url) throws IOException {
+        System.out.println("Adding at: " + url);
         URLConnection connection = (new URL(url)).openConnection();
         connection.setConnectTimeout(5000);
         connection.setReadTimeout(5000);

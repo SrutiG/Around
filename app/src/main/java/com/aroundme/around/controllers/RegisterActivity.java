@@ -39,14 +39,14 @@ public class RegisterActivity extends AppCompatActivity {
     public void handleSubmitClicked(View view) {
         String userEmail = email.getText().toString();
         String userPassword = password.getText().toString();
-        String userFirst = email.getText().toString();
-        String userLast = email.getText().toString();
+        String userFirst = first_name.getText().toString();
+        String userLast = last_name.getText().toString();
         SharedPreferences sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         Editor editor = sp.edit();
         editor.putString("email", userEmail);
         Intent viewMain = new Intent(this, MainActivity.class);
         startActivity(viewMain);
-        new UserAdder().execute("first", "last", "email", "pass");
+        new UserAdder().execute(userFirst, userLast, userEmail, userPassword);
     }
 
     public void handleCancelClicked(View view) {

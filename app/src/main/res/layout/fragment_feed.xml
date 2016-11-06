@@ -36,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +47,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Post to local feed..." />
+                android:hint="Post to local feed..."
+                android:background="@color/cardview_light_background"
+                android:layout_marginRight="20dp"
+                android:padding="5dp" />
 
         </LinearLayout>
     </RelativeLayout>
