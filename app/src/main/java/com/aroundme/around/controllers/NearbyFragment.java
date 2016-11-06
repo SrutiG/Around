@@ -51,16 +51,16 @@ public class NearbyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_nearby, container, false);
-        User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass");
+        User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass", null);
         Sruti.setStatus("Can someone please teach me Javascript?");
         Sruti.setInterests("Coding Running Traveling Food");
-        User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob");
+        User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob", null);
         Bob.setStatus("Looking for people to play football with");
         Bob.setInterests("Math Philosophy");
-        User Potato = new User("Potato", "Salad", "potato@salad.com", "potato");
+        User Potato = new User("Potato", "Salad", "potato@salad.com", "potato", null);
         Potato.setStatus("Does someone want to cook potatoes with me?");
         Potato.setInterests("Potato Sweet Potato Yam");
-        User Pablo = new User ("Pablo", "Picasso", "pablo.picasso@gmail.com", "pablo");
+        User Pablo = new User ("Pablo", "Picasso", "pablo.picasso@gmail.com", "pablo", null);
         Pablo.setStatus("Available");
         Pablo.setInterests("Art Painting History");
         users.add(Potato);

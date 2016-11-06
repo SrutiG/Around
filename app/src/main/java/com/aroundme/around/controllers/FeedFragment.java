@@ -86,7 +86,7 @@ public class FeedFragment extends Fragment {
         feedManager = new LinearLayoutManager(getActivity());
         feed_list.setLayoutManager(feedManager);
         feed_list.setItemAnimator(new DefaultItemAnimator());
-        feedAdapter = new FeedAdapter(users);
+        feedAdapter = new FeedAdapter(users, getContext());
         feedAdapter.setMain(main);
         feed_list.setAdapter(feedAdapter);
 

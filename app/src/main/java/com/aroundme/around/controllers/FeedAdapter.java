@@ -1,5 +1,6 @@
 package com.aroundme.around.controllers;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.ImageLoader;
 import com.aroundme.around.models.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static android.view.View.GONE;
+import static com.aroundme.around.R.id.profile_pic;
+import static java.lang.System.load;
 
 /**
  * Created by Sruti on 11/5/16.
@@ -26,6 +32,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
 
     private ArrayList<User> users;
     private MainActivity main;
+    private Context context;
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -58,8 +65,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         }
     }
 
-    public FeedAdapter(ArrayList<User> users) {
+    public FeedAdapter(ArrayList<User> users, Context context) {
         this.users = users;
+        this.context = context;
     }
 
     public void setMain(MainActivity main) {
@@ -81,6 +89,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         final String email = user.getEmail();
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_message.setText(user.getStatus());
+        System.out.println("Image: " + user.getImage() + " " + context == null);
+        Picasso.with(context).load(user.getImage()).into(holder.profile_pic);
+
         holder.message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
