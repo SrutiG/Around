@@ -1,7 +1,5 @@
 package com.aroundme.around.models;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by patrickcaruso on 11/5/16.
  */

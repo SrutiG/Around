@@ -4,20 +4,15 @@ import android.os.AsyncTask;
 
 import com.aroundme.around.controllers.Holder;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 /**
  * Created by patrickcaruso on 11/5/16.
@@ -37,6 +32,8 @@ public class MapBridge extends AsyncTask<String, String,String> {
             return updateNearbyUsers(Holder.distance, Holder.tracker.getLatitude(), Holder.tracker.getLongitude());
         } else if (params[0].equals("write")) {
             pingLocation();
+        } else if (params[0].equals("custom")) {
+            return updateNearbyUsers(Integer.parseInt(params[1]), Double.parseDouble(params[2]), Double.parseDouble(params[3]));
         }
         return null;
     }
@@ -71,10 +68,11 @@ public class MapBridge extends AsyncTask<String, String,String> {
     }
 
     public static String getHtml(String url) throws IOException {
+        System.out.println("Pinging " + url);
         // Build and set timeout values for the request.
         URLConnection connection = (new URL(url)).openConnection();
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(5000);
+        connection.setConnectTimeout(10000);
+        connection.setReadTimeout(10000);
         connection.connect();
 
         // Read and store the result line by line then return the entire string.
@@ -86,6 +84,7 @@ public class MapBridge extends AsyncTask<String, String,String> {
         }
         in.close();
 
+        System.out.println("GOT: " + html.toString());
         return html.toString();
         }
 

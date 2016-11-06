@@ -3,9 +3,6 @@ package com.aroundme.around.controllers;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -13,17 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import com.aroundme.around.R;
-import com.aroundme.around.models.Database;
 import com.aroundme.around.models.MapBridge;
-import com.squareup.picasso.Picasso;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class MainActivity extends FragmentActivity {
 
@@ -50,7 +39,7 @@ public class MainActivity extends FragmentActivity {
         sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         MapFragment map = new MapFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment, map).addToBackStack(null).commit();
-
+        map.setMain(this);
         new MapBridge().execute("read");
         new MapBridge().execute("write");
     }
@@ -59,6 +48,7 @@ public class MainActivity extends FragmentActivity {
         MapFragment map = new MapFragment();
         map.setMain(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, map).addToBackStack(null).commit();
+
     }
 
     public void handleFeedClicked(View view) {
@@ -71,9 +61,6 @@ public class MainActivity extends FragmentActivity {
         ProfileFragment profile = new ProfileFragment();
         profile.setMain(this);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, profile).addToBackStack(null).commit();
-
-
-
     }
 
     public void handleSettingsClicked(View view) {
@@ -90,6 +77,15 @@ public class MainActivity extends FragmentActivity {
 
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment, fragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //System.out.println((Holder.last == null) + " + " + (Holder.delay == null));
+        if (Holder.delay != null) {
+            System.out.println("Hijacking!");
+            //setFragment(Holder.delay);
+        }
     }
 
 

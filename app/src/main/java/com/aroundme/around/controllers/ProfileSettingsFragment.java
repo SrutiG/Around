@@ -26,7 +26,6 @@ import android.widget.TextView;
 import com.aroundme.around.R;
 import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.ProfileLoader;
-import com.aroundme.around.models.StatusUpdater;
 import com.aroundme.around.models.UserUpdater;
 import com.squareup.picasso.Picasso;
 
