@@ -108,7 +108,6 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             ImageView finder = (ImageView) flayout.findViewById(R.id.editPic);
             Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
 
-            new StatusUpdater().execute("" + Holder.id, p.getStatus(), "" + System.currentTimeMillis());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -120,6 +119,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
         ((Button) flayout.findViewById(R.id.submitBT)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //new StatusUpdater().execute("" + Holder.id, p.getStatus(), "" + System.currentTimeMillis());
                 String s = ((EditText) flayout2.findViewById(R.id.full_name_text)).getText().toString();
                 if (s.indexOf(" ") > 0) {
                     new UserUpdater().execute("" + Holder.id, s.split(" ", 2)[0], s.split(" ", 2)[1],

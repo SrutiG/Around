@@ -59,9 +59,10 @@ public class ProfileFragment extends Fragment {
             ImageView finder = (ImageView) v.findViewById(R.id.picture);
             Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
 
-            ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
-            ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
-            ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
+            System.out.println("Your status " + p.getStatus());
+            ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName().trim() + " " + p.getLastName().trim());
+            ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests().trim());
+            ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus().trim());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
