@@ -120,6 +120,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
         final View flayout2 = flayout;
