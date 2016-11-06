@@ -80,4 +80,8 @@ public class User {
         return description;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

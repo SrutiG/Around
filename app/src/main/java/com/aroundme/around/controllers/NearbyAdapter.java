@@ -1,5 +1,6 @@
 package com.aroundme.around.controllers;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.aroundme.around.models.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ import static com.aroundme.around.R.id.profile_pic;
 public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.MyViewHolder> {
 
     private ArrayList<User> users;
+    private Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -51,7 +54,8 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.MyViewHold
 
     }
 
-    public NearbyAdapter(ArrayList<User> users) { this.users = users; }
+    public NearbyAdapter(ArrayList<User> users, Context context) { this.users = users;
+        this.context = context;}
 
     @Override
     public NearbyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -68,6 +72,11 @@ public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.MyViewHold
         holder.name_nearby.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_nearby.setText(user.getStatus());
         holder.other_nearby.setText(user.getInterests());
+
+        System.out.println(user.getImage());
+        String url = user.getImage().split("<br", 2)[0].trim();
+        System.out.println(url);
+        Picasso.with(context).load(url).into(holder.propic_nearby);
     }
 
     @Override

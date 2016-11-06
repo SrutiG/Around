@@ -15,9 +15,15 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.MapBridge;
+import com.aroundme.around.models.Profile;
+import com.aroundme.around.models.ProfileLoader;
+import com.aroundme.around.models.Status;
+import com.aroundme.around.models.StatusFetcher;
 import com.aroundme.around.models.User;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import static com.aroundme.around.controllers.Holder.user;
 
@@ -49,28 +55,43 @@ public class NearbyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String s = null;
+        try {
+            s = new MapBridge().execute("read").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for (String ss: s.split("<br/>")) {
+            String[] entries = ss.split(" , ");
+            int i = Integer.parseInt(entries[0].trim());
+            String firstName = entries[1];
+            String lastName = entries[2];
+            double lat = Double.parseDouble(entries[3].trim());
+            double lon = Double.parseDouble(entries[4].trim());
+            double distance = Double.parseDouble(entries[5].trim());
+
+            User user = new User(firstName, lastName, null, null, null);
+            try {
+                Profile prof = new ProfileLoader().execute("" + i).get();
+                user.setStatus(prof.getStatus());
+                user.setInterests(prof.getInterests());
+                user.setImage(prof.getImg().split("\t", 2)[0]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+            users.add(user);
+        }
         // Inflate the layout for this fragment
         FrameLayout flayout = (FrameLayout) inflater.inflate(R.layout.fragment_nearby, container, false);
-        User Sruti = new User("Sruti", "Guhathakurta", "sruti@gatech.edu", "pass", null);
-        Sruti.setStatus("Can someone please teach me Javascript?");
-        Sruti.setInterests("Coding Running Traveling Food");
-        User Bob = new User("Bob", "Smith", "Bob@bob.edu", "bob", null);
-        Bob.setStatus("Looking for people to play football with");
-        Bob.setInterests("Math Philosophy");
-        User Potato = new User("Potato", "Salad", "potato@salad.com", "potato", null);
-        Potato.setStatus("Does someone want to cook potatoes with me?");
-        Potato.setInterests("Potato Sweet Potato Yam");
-        User Pablo = new User ("Pablo", "Picasso", "pablo.picasso@gmail.com", "pablo", null);
-        Pablo.setStatus("Available");
-        Pablo.setInterests("Art Painting History");
-        users.add(Potato);
-        users.add(Sruti);
-        users.add(Bob);
-        users.add(Pablo);
         people_list = (RecyclerView) flayout.findViewById(R.id.people_list);
         nearbyManager = new LinearLayoutManager(getActivity());
         people_list.setLayoutManager(nearbyManager);
-        nearbyAdapter = new NearbyAdapter(users);
+        nearbyAdapter = new NearbyAdapter(users, getContext());
         people_list.setAdapter(nearbyAdapter);
         FloatingActionButton action = (FloatingActionButton) flayout.findViewById(R.id.fab);
         action.setOnClickListener(new View.OnClickListener() {

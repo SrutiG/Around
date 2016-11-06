@@ -24,7 +24,7 @@ public class ProfileLoader extends AsyncTask<String, Void, Profile>  {
     @Override
     protected Profile doInBackground(String... params) {
         try {
-            return loadUser(Holder.id);
+            return loadUser(Integer.parseInt(params[0]));
         } catch (IOException e) {
             e.printStackTrace();
         }
