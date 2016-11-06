@@ -9,11 +9,14 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +42,7 @@ public class ProfileFragment extends Fragment {
 
     ImageView status_ic;
     int person_id;
+    ImageButton message_user, star_ic;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -67,8 +71,19 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            person_id = getArguments().getInt("person_id");
+        }
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         status_ic = (ImageView) v.findViewById(R.id.status_ic);
+        message_user = (ImageButton) v.findViewById(R.id.message_user);
+        star_ic = (ImageButton) v.findViewById(R.id.star_ic);
+        message_user.setVisibility(View.GONE);
+        star_ic.setVisibility(View.GONE);
+        if (person_id != 0) {
+            message_user.setVisibility(View.VISIBLE);
+            star_ic.setVisibility(View.VISIBLE);
+        }
 
         URL url;
         try {

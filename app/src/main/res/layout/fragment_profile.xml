@@ -26,19 +26,35 @@
 
             <LinearLayout
                 android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sruti Guhathakurta"
-                    android:gravity="center"
                     android:textSize="25sp"
                     android:id="@+id/full_name"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:textColor="@color/Header"
-                    android:layout_weight="1" />
+                    android:layout_marginEnd="@dimen/activity_vertical_margin"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star_empty"
+                    android:background="@color/windowBackground"
+                    android:paddingBottom="4dp"
+                    android:id="@+id/star_ic"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_message_text"
+                    android:id="@+id/message_user"
+                    android:background="@color/windowBackground"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"/>
             </LinearLayout>
 
             <LinearLayout
@@ -64,15 +80,7 @@
                     android:textSize="18dp"
                     android:id="@+id/status_text" />
 
-                <ImageButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_message_text"
-                    android:id="@+id/imageButton2"
-                    android:visibility="visible"
-                    android:background="?android:attr/windowBackground"
-                    android:layout_marginLeft="15dp"
-                    android:scaleType="fitCenter"/>
+
 
             </LinearLayout>
 
@@ -134,7 +142,14 @@
                 android:layout_height="wrap_content"
                 android:text="Running Coding Traveling Watching Netflix"
                 android:textColor="@color/text"
-                android:id="@+id/interests"/>
+                android:id="@+id/interests"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="back"
+                android:id="@+id/backButton"
+                android:background="@color/button"/>
         </LinearLayout>
 
 

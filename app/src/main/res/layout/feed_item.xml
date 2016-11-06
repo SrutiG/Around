@@ -12,14 +12,16 @@
         android:weightSum="1"
         android:orientation="horizontal"
         android:paddingRight="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical">
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:src="@drawable/ic_action_name"
             android:layout_weight="0.25"
-            android:layout_gravity="left"
-            android:id="@+id/profile_pic"/>
+            android:layout_gravity="start"
+            android:id="@+id/profile_pic"
+            android:scaleType="fitCenter" />
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
