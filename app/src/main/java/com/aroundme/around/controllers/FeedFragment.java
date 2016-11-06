@@ -110,7 +110,7 @@ public class FeedFragment extends Fragment {
                     Status status = new StatusFetcher().execute("" + id).get();
 
                     User user = new User(id, first, last, "", "", status.getImage());
-                    user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
+                    user.setStatus(status.getStatus());
                     //user.setImage(status.getImage());
                     users.add(user);
                 }
