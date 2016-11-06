@@ -28,9 +28,9 @@ public class StatusFetcher extends AsyncTask<String, Void, Status >  {
 
             System.out.println("GOT" + s );
             String[] parts = s.split(" , ", 3);
-            if (parts[1] != null && parts[1].length() > 0) {
+            if (parts.length > 1 && parts[1] != null && parts[1].length() > 0) {
                 return new com.aroundme.around.models.Status(parts[0], Long.parseLong(parts[1]), parts[2]);
-            } else {
+            } else if (parts.length > 1){
                 return new com.aroundme.around.models.Status(parts[0], 0L, parts[2]);
             }
         } catch (IOException e) {

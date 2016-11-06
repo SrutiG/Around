@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.aroundme.around.R;
 import com.aroundme.around.controllers.MainActivity;
+import com.aroundme.around.models.User;
 import com.aroundme.around.models.UserAdder;
+import com.aroundme.around.models.UserLoader;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -43,10 +45,13 @@ public class RegisterActivity extends AppCompatActivity {
         String userLast = last_name.getText().toString();
         SharedPreferences sp = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
         Editor editor = sp.edit();
-        editor.putString("email", userEmail);
+        Holder.user = userEmail;
+        new UserAdder().execute(userFirst, userLast, userEmail, userPassword);
+        new UserLoader().execute(userEmail, userPassword);
+        editor.putBoolean("login", true);
         Intent viewMain = new Intent(this, MainActivity.class);
         startActivity(viewMain);
-        new UserAdder().execute(userFirst, userLast, userEmail, userPassword);
+
     }
 
     public void handleCancelClicked(View view) {

@@ -104,7 +104,7 @@ public class ProfileSettingsFragment extends Fragment implements AdapterView.OnI
                 Intent login = new Intent(getActivity(), LoginActivity.class);
                 SharedPreferences sp = getActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE);
                 Editor editor = sp.edit();
-                editor.remove("email");
+                editor.remove("login");
                 startActivity(login);
 
             }

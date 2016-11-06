@@ -24,6 +24,7 @@ public class UserAdder extends AsyncTask<String, Void, String>  {
     protected String doInBackground(String... params) {
         try {
             getHtml("http://bibliotecas.net46.net/addUser.php?first=" + params[0] + "&last=" + params[1] + "&email=" + params[2] + "&pass=" + params[3]);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
