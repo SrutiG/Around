@@ -73,7 +73,7 @@ public class NearbyFragment extends Fragment {
             double lon = Double.parseDouble(entries[4].trim());
             double distance = Double.parseDouble(entries[5].trim());
 
-            User user = new User(firstName, lastName, null, null, null);
+            User user = new User(i, firstName, lastName, null, null, null);
             try {
                 Profile prof = new ProfileLoader().execute("" + i).get();
                 user.setStatus(prof.getStatus());

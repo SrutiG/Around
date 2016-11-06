@@ -11,11 +11,12 @@
         android:gravity="center"
         android:padding="@dimen/activity_vertical_margin">
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/ic_action_name"
             android:id="@+id/propic_nearby"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:scaleType="fitCenter"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

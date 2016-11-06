@@ -13,9 +13,11 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class ProfileFragment extends Fragment {
     ImageView status_ic;
     int person_id;
     ImageButton message_user, star_ic;
+    Button backButton;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -78,22 +81,54 @@ public class ProfileFragment extends Fragment {
         status_ic = (ImageView) v.findViewById(R.id.status_ic);
         message_user = (ImageButton) v.findViewById(R.id.message_user);
         star_ic = (ImageButton) v.findViewById(R.id.star_ic);
+        backButton = (Button) v.findViewById(R.id.backButton);
         message_user.setVisibility(View.GONE);
         star_ic.setVisibility(View.GONE);
-        if (person_id != 0) {
-            message_user.setVisibility(View.VISIBLE);
-            star_ic.setVisibility(View.VISIBLE);
-        }
+        backButton.setVisibility(View.GONE);
+
 
         URL url;
         try {
-            Profile p = new ProfileLoader().execute("" + Holder.id).get();
+            Profile p;
+            if (person_id == 0) {
+                p = new ProfileLoader().execute("" + Holder.id).get();
+            } else {
+                p = new ProfileLoader().execute("" + person_id).get();
+            }
             ImageView finder = (ImageView) v.findViewById(R.id.picture);
             Picasso.with(getContext()).load(p.getImg().split("\t<", 2)[0]).into(finder);
 
             ((TextView) v.findViewById(R.id.full_name)).setText(p.getFirstName() + p.getLastName());
             ((TextView) v.findViewById(R.id.interests)).setText(p.getInterests());
             ((TextView) v.findViewById(R.id.status_text)).setText(p.getStatus());
+            if (person_id != 0) {
+                star_ic.setVisibility(View.VISIBLE);
+                backButton.setVisibility(View.VISIBLE);
+                backButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {getActivity().onBackPressed();
+                    }
+                });
+                star_ic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    if (star_ic.getDrawable().equals(R.drawable.ic_star_empty)) {
+                        star_ic.setImageResource(R.drawable.ic_star_full);
+                    } else if (star_ic.getDrawable().equals(R.drawable.ic_star_full)) {
+                        star_ic.setImageResource(R.drawable.ic_star_empty);
+                    }
+                    }
+                });
+                if (!(p.getStatus().trim().equals("Do Not Disturb"))) {
+                    message_user.setVisibility(View.VISIBLE);
+                    message_user.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+                }
+            }
             if (p.getStatus().trim().equals("Do Not Disturb")) {
                 status_ic.setImageResource(R.drawable.ic_unavailable);
             };

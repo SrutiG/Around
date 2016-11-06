@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_star_empty"
-                    android:background="@color/windowBackground"
+                    android:background="@color/cardview_light_background"
                     android:paddingBottom="4dp"
                     android:id="@+id/star_ic"/>
                 <ImageButton
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_message_text"
                     android:id="@+id/message_user"
-                    android:background="@color/windowBackground"
+                    android:background="@color/cardview_light_background"
                     android:layout_marginLeft="10dp"
                     android:scaleType="fitCenter"/>
             </LinearLayout>
@@ -149,7 +149,8 @@
                 android:layout_height="wrap_content"
                 android:text="back"
                 android:id="@+id/backButton"
-                android:background="@color/button"/>
+                android:background="@color/button"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
         </LinearLayout>
 
 

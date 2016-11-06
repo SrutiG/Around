@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aroundme.around.R;
+import com.aroundme.around.models.Profile;
 import com.aroundme.around.models.User;
 import com.squareup.picasso.Picasso;
 
@@ -83,7 +84,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         User user = users.get(position);
-        final String email = user.getEmail();
+        final int id = user.getId();
         holder.name.setText(user.getFirstName() + " " + user.getLastName());
         holder.status_message.setText(user.getStatus());
         Picasso.with(context).load(user.getImage().split("<br", 2)[0].trim()).into(holder.profile_pic);
@@ -99,11 +100,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         holder.view_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProfileSettingsFragment profile = new ProfileSettingsFragment();
+                ProfileFragment profile = new ProfileFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString("email", email);
+                System.out.println("id: " + id);
+                bundle.putInt("person_id", id);
                 profile.setArguments(bundle);
-                //main.setFragment(profile);
+                main.setFragment(profile);
             }
         });
         holder.comment.setOnClickListener(new View.OnClickListener() {

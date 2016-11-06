@@ -58,7 +58,6 @@ public class FeedFragment extends Fragment {
 
         try {
             String s = new MapBridge().execute("read").get();
-
             String[] splits = s.split("<br/>");
             System.out.println(splits != null ?  splits.length :  0);
             for (int i = 0; i < splits.length; i++) {
@@ -70,7 +69,7 @@ public class FeedFragment extends Fragment {
 
                 Status status = new StatusFetcher().execute("" + id).get();
 
-                User user = new User(first, last, "", "", status.getImage());
+                User user = new User(id, first, last, "", "", status.getImage());
                 user.setStatus(status.getStatus() + " @ " + status.getTimestamp());
                 //user.setImage(status.getImage());
                 users.add(user);

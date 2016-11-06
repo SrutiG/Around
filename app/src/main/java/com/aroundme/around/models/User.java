@@ -14,10 +14,12 @@ public class User {
     private String interests;
     private String description;
     private String image;
+    private int id;
 
 
 
-    public User(String firstName, String lastName, String email, String password, String image) {
+    public User(int id, String firstName, String lastName, String email, String password, String image) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -84,4 +86,5 @@ public class User {
         this.image = image;
     }
 
+    public int getId() { return id; }
 }
