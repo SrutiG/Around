@@ -92,6 +92,7 @@ public class ProfileFragment extends Fragment {
             URL url;
             try {
                 Profile p;
+                System.out.println("Holder id" + Holder.id);
                 if ((person_id == 0) || (person_id == Holder.id)) {
                     p = new ProfileLoader().execute("" + Holder.id).get();
                 } else {

@@ -22,6 +22,7 @@ public class UserLoader extends AsyncTask<String, Void, Integer>  {
     protected Integer doInBackground(String... params) {
         try {
             Holder.id = Integer.parseInt(getHtml("http://bibliotecas.net46.net/profileID.php?user=" + params[0] + "&pass=" + params[1]).split("\t", 2)[0]);
+            System.out.println("The id is ... " + Holder.id);
         } catch (IOException e) {
             e.printStackTrace();
 
